@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = "http://localhost:5003";
+const API_URL = "https://habit-tracker-backend-urc7.onrender.com";
 
 // Create axios instance with default config
 const axiosInstance = axios.create({
