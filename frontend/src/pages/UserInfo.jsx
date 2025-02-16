@@ -65,7 +65,7 @@ const UserInfo = () => {
             <div className="relative group">
               <div className="absolute -inset-0.5 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-full opacity-50 blur"></div>
               <img
-                src={user?.profilePicture ? `http://localhost:5003${user.profilePicture}` : 'https://via.placeholder.com/150'}
+                src={user?.profilePicture ? `https://habit-tracker-backend-urc7.onrender.com${user.profilePicture}` : 'https://via.placeholder.com/150'}
                 alt="Profile"
                 className="relative w-24 sm:w-28 lg:w-32 h-24 sm:h-28 lg:h-32 rounded-full object-cover border-2 border-white/20"
               />
