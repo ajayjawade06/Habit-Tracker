@@ -133,7 +133,7 @@ const Dashboard = () => {
             <div className="flex items-center space-x-2 sm:space-x-4">
               <div className="flex items-center space-x-2 sm:space-x-4">
                 <img
-                  src={user?.profilePicture ? `https://habit-tracker-backend-urc7.onrender.com${user.profilePicture}` : 'https://via.placeholder.com/40'}
+                  src={user?.profilePicture ? `http://localhost:5003${user.profilePicture}` : 'https://via.placeholder.com/40'}
                   alt="Profile"
                   className="w-8 h-8 sm:w-10 sm:h-10 rounded-full object-cover border-2 border-white/20"
                 />
@@ -166,7 +166,7 @@ const Dashboard = () => {
                 className="group relative"
               >
                 <img
-                  src={user?.profilePicture ? `https://habit-tracker-backend-urc7.onrender.com${user.profilePicture}` : 'https://via.placeholder.com/40'}
+                  src={user?.profilePicture ? `http://localhost:5003${user.profilePicture}` : 'https://via.placeholder.com/40'}
                   alt="Profile"
                   className="w-12 h-12 rounded-full object-cover border-2 border-white/20 transition-all duration-300 group-hover:border-white/40"
                 />

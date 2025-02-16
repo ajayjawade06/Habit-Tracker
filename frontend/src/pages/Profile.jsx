@@ -26,7 +26,7 @@ const Profile = () => {
         address: user.address || '',
       });
       if (user.profilePicture) {
-        setPreviewUrl(`https://habit-tracker-backend-urc7.onrender.com${user.profilePicture}`);
+        setPreviewUrl(`http://localhost:5003${user.profilePicture}`);
       }
     }
   }, [user]);
