@@ -1,0 +1,257 @@
+# Habit Tracker Application Documentation
+
+## INTRODUCTION
+
+### Introduction of Project
+The Habit Tracker is a modern web application designed to help users develop and maintain positive habits through systematic tracking and gamification. It addresses the common challenge of habit formation by providing a structured, engaging platform for tracking progress and maintaining motivation.
+
+### Existing System and Need for System
+Existing habit tracking solutions often lack:
+- Engaging user interfaces
+- Gamification elements
+- Real-time progress tracking
+- Automated streak calculations
+- Badge systems for motivation
+
+This system fills these gaps by providing:
+- Modern, responsive interface
+- Automated badge system
+- Detailed progress tracking
+- Customizable habit categories
+- Visual feedback and achievements
+
+### Scope of Work
+The system encompasses:
+1. User Management System
+   - Authentication and authorization
+   - Profile management
+   - Password recovery
+
+2. Habit Management
+   - Creation and tracking
+   - Category organization
+   - Progress monitoring
+   - Streak calculations
+
+3. Achievement System
+   - Automated badge awards
+   - Progress visualization
+   - Milestone tracking
+
+### Operating Environment
+
+#### Hardware Requirements
+- Server:
+  - Minimum 2GB RAM
+  - 2 CPU cores
+  - 20GB storage
+  - Network connectivity
+
+- Client:
+  - Any modern web browser
+  - Minimum 1GB RAM
+  - Internet connection
+
+#### Software Requirements
+- Server:
+  - Node.js runtime environment
+  - MongoDB database
+  - Express.js framework
+  - Linux/Windows/macOS
+
+- Client:
+  - Modern web browsers (Chrome, Firefox, Safari, Edge)
+  - JavaScript enabled
+  - Cookie support
+
+### Detail Description of Technology Used
+
+#### Frontend Technologies
+1. React 19
+   - Modern component architecture
+   - Virtual DOM for performance
+   - Hook-based state management
+
+2. Vite Build Tool
+   - Fast development server
+   - Efficient build process
+   - Hot Module Replacement
+
+3. TailwindCSS
+   - Utility-first styling
+   - Responsive design
+   - Custom theming
+
+4. Additional Libraries
+   - React Router for navigation
+   - Axios for HTTP requests
+   - React Icons for UI elements
+
+#### Backend Technologies
+1. Node.js & Express.js
+   - RESTful API architecture
+   - Middleware support
+   - Route handling
+
+2. MongoDB & Mongoose
+   - NoSQL database
+   - Schema validation
+   - Indexing for performance
+
+3. Security
+   - JWT authentication
+   - Bcrypt for password hashing
+   - Cookie-based sessions
+
+4. File Handling
+   - Multer for file uploads
+   - Profile picture storage
+
+## PROPOSED SYSTEMS
+
+### Objectives of System
+1. User Engagement
+   - Provide intuitive interface
+   - Implement gamification
+   - Offer visual progress tracking
+
+2. Habit Formation
+   - Support daily/weekly habits
+   - Track completion streaks
+   - Award achievements
+
+3. Data Management
+   - Secure user data
+   - Efficient habit tracking
+   - Progress analytics
+
+### Proposed System
+The system is structured as a full-stack web application with:
+
+1. Frontend Layer
+   - React-based SPA
+   - Responsive design
+   - Real-time updates
+
+2. Backend Layer
+   - RESTful API
+   - Database management
+   - Authentication system
+
+3. Database Layer
+   - User data storage
+   - Habit tracking
+   - Achievement records
+
+### User Requirements
+1. Authentication
+   - User registration
+   - Secure login
+   - Password recovery
+   - Profile management
+
+2. Habit Management
+   - Create/edit/delete habits
+   - Set categories and frequency
+   - Track completion
+   - View progress
+
+3. Achievement System
+   - View earned badges
+   - Track streaks
+   - Monitor progress
+
+## ANALYSIS AND DESIGN
+
+### Entity Relationship Diagram (ERD)
+```
+[User] 1 ----< [Habit] 1 ----< [CompletionHistory]
+  |
+  +----< [Badge]
+```
+
+Key Entities:
+- User (id, name, email, password, profilePicture)
+- Habit (id, userId, title, description, category, frequency)
+- CompletionHistory (id, habitId, date, completed)
+- Badge (id, habitId, name, description, dateEarned)
+
+### Data Flow Diagram (DFD)
+Level 0:
+```
+[User] <---> [Habit Tracker System] <---> [Database]
+```
+
+Level 1:
+```
+[User Interface] ---> [Authentication] ---> [Habit Management] ---> [Database]
+                                      ---> [Achievement System]
+```
+
+### Object Diagram
+Key Objects:
+```
+User Object
+- Properties: id, name, email
+- Methods: login(), updateProfile()
+
+Habit Object
+- Properties: title, category, streak
+- Methods: complete(), updateStreak()
+
+Badge Object
+- Properties: name, icon, criteria
+- Methods: award(), display()
+```
+
+### Class Diagram
+```
+User
+- Attributes: id, name, email, password
+- Methods: authenticate(), updateProfile()
+
+Habit
+- Attributes: id, title, category, streak
+- Methods: complete(), calculateStreak()
+
+Badge
+- Attributes: id, name, description, icon
+- Methods: checkCriteria(), award()
+```
+
+### Use Case Diagrams
+Primary Actor: User
+```
+User
+- Register/Login
+- Manage Profile
+- Create/Edit/Delete Habits
+- Track Habits
+- View Progress
+- Earn Badges
+```
+
+### Activity Diagram
+Habit Completion Flow:
+```
+[Start] --> [User Login]
+       --> [Select Habit]
+       --> [Mark Complete]
+       --> [Update Streak]
+       --> [Check Badge Criteria]
+       --> [Award Badge if Earned]
+       --> [End]
+```
+
+The system implements these diagrams through:
+1. MongoDB schemas matching the ERD
+2. React components following the class structure
+3. API routes implementing the data flow
+4. User interface supporting all use cases
+5. Backend logic following activity flows
+
+This comprehensive architecture ensures:
+- Scalable and maintainable codebase
+- Clear separation of concerns
+- Efficient data management
+- Optimal user experience
