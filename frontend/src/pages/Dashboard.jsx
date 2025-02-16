@@ -138,7 +138,7 @@ const Dashboard = () => {
                   className="w-8 h-8 sm:w-10 sm:h-10 rounded-full object-cover border-2 border-white/20"
                 />
                 <div>
-                  <h1 className="text-lg sm:text-xl md:text-2xl font-bold text-white">Welcome back, {user?.name}</h1>
+                  <h1 className="text-lg sm:text-xl md:text-2xl font-bold text-white">Welcome, {user?.name}</h1>
                   <p className="text-white/60 text-xs sm:text-sm">Track your habits and achieve your goals</p>
                 </div>
               </div>
