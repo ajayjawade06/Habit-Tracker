@@ -54,7 +54,7 @@ const ResetPassword = () => {
         {success ? (
           <div className="text-center">
             <div className="bg-green-500/20 backdrop-blur-sm p-4 rounded-lg mb-4">
-              Password reset successful! Redirecting to dashboard...
+              Password reset successful! Redirecting to login...
             </div>
           </div>
         ) : (

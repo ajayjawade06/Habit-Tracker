@@ -5,12 +5,9 @@ import User from "../models/User.js";
 import crypto from "crypto";
 import multer from "multer";
 import path from "path";
-import sgMail from '@sendgrid/mail';
+import { generateOTP, sendOTPEmail } from "../utils/emailService.js";
 
 const router = express.Router();
-
-// Configure SendGrid
-sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 // Configure multer for file upload
 const storage = multer.diskStorage({
@@ -36,13 +33,6 @@ const upload = multer({
     cb(new Error('Only .png, .jpg and .jpeg format allowed!'));
   }
 });
-
-
-// Generate OTP
-const generateOTP = () => {
-  return Math.floor(100000 + Math.random() * 900000).toString();
-};
-
 
 // Verify OTP Route
 router.post("/verify-otp", async (req, res) => {
@@ -231,57 +221,30 @@ router.post("/forgot-password", async (req, res) => {
     user.resetOTPExpiry = Date.now() + 600000; // 10 minutes expiry
     await user.save();
 
-    // Email content with OTP
-    const msg = {
-      to: email,
-      from: process.env.SENDGRID_FROM_EMAIL,
-      subject: 'Password Reset OTP',
-      html: `
-        <h1>Password Reset OTP</h1>
-        <p>You requested a password reset for your account.</p>
-        <p>Your OTP is: <strong>${otp}</strong></p>
-        <p>This OTP will expire in 10 minutes.</p>
-        <p>If you didn't request this, please ignore this email.</p>
-      `
-    };
-
-    try {
-      await sgMail.send(msg);
-      console.log("Password reset email sent successfully to:", email);
-      
-      // Always return OTP in development mode
-      if (process.env.NODE_ENV === 'development') {
-        res.json({ 
-          message: "Password reset OTP sent successfully!", 
-          otp: otp
-        });
-      } else {
-        res.json({ message: "Password reset OTP sent successfully!" });
-      }
-    } catch (emailError) {
-      console.error("SendGrid error:", emailError);
-      if (emailError.response) {
-        console.error(emailError.response.body);
-      }
-      // Return error to client
-      res.status(500).json({ 
-        message: "Failed to send reset email. Please try again later.",
-        error: process.env.NODE_ENV === 'development' ? emailError.message : undefined
+    // Send OTP via email
+    const emailSent = await sendOTPEmail(email, otp);
+    
+    if (!emailSent) {
+      return res.status(500).json({ 
+        message: "Failed to send reset email. Please try again later." 
       });
     }
-  } catch (error) {
-    console.error("Forgot password error:", {
-      error: error.message,
-      stack: error.stack,
-      email: email
-    });
-    
-    let errorMessage = "Error sending password reset email";
-    if (error.message.includes('Email service not configured')) {
-      errorMessage = "Email service is temporarily unavailable. Please try again later.";
+
+    // Return response based on environment
+    if (process.env.NODE_ENV === 'development') {
+      res.json({ 
+        message: "Password reset OTP sent successfully!", 
+        otp: otp  // Only in development mode
+      });
+    } else {
+      res.json({ message: "Password reset OTP sent successfully!" });
     }
-    
-    res.status(500).json({ message: errorMessage });
+  } catch (error) {
+    console.error("Forgot password error:", error);
+    res.status(500).json({ 
+      message: "Error processing password reset request",
+      error: process.env.NODE_ENV === 'development' ? error.message : undefined
+    });
   }
 });
 
