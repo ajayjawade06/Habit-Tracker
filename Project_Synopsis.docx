@@ -255,3 +255,22 @@ This comprehensive architecture ensures:
 - Clear separation of concerns
 - Efficient data management
 - Optimal user experience
+
+The application implements a gamified badge system to encourage user engagement and habit consistency. Users can earn the following badges:
+
+Week Warrior (🔥)
+
+Awarded for maintaining a 7-day streak on a habit
+Recognizes consistent daily commitment
+Encourages short-term goal achievement
+Monthly Master (⭐)
+
+Awarded for maintaining a 30-day streak on a habit
+Celebrates long-term dedication
+Represents significant milestone in habit formation
+Century Club (💯)
+
+Awarded for completing a habit 100 times
+Acknowledges cumulative achievement
+Recognizes overall dedication to habit development
+The badge system is automatically managed, with badges being awarded in real-time as users achieve these milestones. Each badge includes a distinctive icon and is displayed on the user's dashboard, providing visual recognition of their achievements.
