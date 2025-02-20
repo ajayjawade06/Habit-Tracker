@@ -5,9 +5,124 @@ import User from "../models/User.js";
 import crypto from "crypto";
 import multer from "multer";
 import path from "path";
-import { generateOTP, sendOTPEmail } from "../utils/emailService.js";
+import { generateOTP, sendOTPEmail, sendVerificationEmail } from "../utils/emailService.js";
 
 const router = express.Router();
+
+// Email Verification Route
+router.post("/verify-email", async (req, res) => {
+  try {
+    const { email, otp } = req.body;
+    
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    // Check if already verified
+    if (user.isVerified) {
+      return res.status(400).json({ 
+        message: "Email is already verified",
+        redirectTo: "/login"
+      });
+    }
+
+    // Check if OTP exists
+    if (!user.verificationOTP || !user.verificationOTPExpiry) {
+      return res.status(400).json({ 
+        message: "No verification code found. Please register again or request a new code." 
+      });
+    }
+
+    // Check if OTP is expired
+    if (user.verificationOTPExpiry < Date.now()) {
+      return res.status(400).json({ 
+        message: "Verification code has expired. Please request a new one.",
+        expired: true
+      });
+    }
+
+    // Verify OTP
+    if (user.verificationOTP !== otp.trim()) {
+      return res.status(400).json({ 
+        message: "Invalid verification code. Please check and try again." 
+      });
+    }
+
+    // Update user verification status
+    user.isVerified = true;
+    user.verificationOTP = null;
+    user.verificationOTPExpiry = null;
+    await user.save();
+
+    res.json({ 
+      message: "Email verified successfully",
+      redirectTo: "/login"
+    });
+  } catch (error) {
+    console.error("Email verification error:", error);
+    res.status(500).json({ message: "Error verifying email" });
+  }
+});
+
+// Resend Verification Code
+router.post("/resend-verification", async (req, res) => {
+  try {
+    const { email } = req.body;
+    
+    const user = await User.findOne({ email, isVerified: false });
+    if (!user) {
+      return res.status(404).json({ message: "User not found or already verified" });
+    }
+
+    // Generate new OTP
+    const verificationOTP = generateOTP();
+    user.verificationOTP = verificationOTP;
+    user.verificationOTPExpiry = new Date(Date.now() + 600000); // 10 minutes
+    await user.save();
+
+    // Send new verification email
+    await sendVerificationEmail(email, verificationOTP, user.name);
+
+    res.json({ message: "Verification code resent successfully" });
+  } catch (error) {
+    console.error("Resend verification error:", error);
+    res.status(500).json({ message: "Error resending verification code" });
+  }
+});
+
+// Update Email During Verification
+router.post("/update-verification-email", async (req, res) => {
+  try {
+    const { email, oldEmail } = req.body;
+    
+    // Check if new email is already in use
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return res.status(400).json({ message: "Email is already in use" });
+    }
+
+    const user = await User.findOne({ email: oldEmail, isVerified: false });
+    if (!user) {
+      return res.status(404).json({ message: "User not found or already verified" });
+    }
+
+    // Generate new OTP
+    const verificationOTP = generateOTP();
+    user.email = email;
+    user.verificationOTP = verificationOTP;
+    user.verificationOTPExpiry = new Date(Date.now() + 600000); // 10 minutes
+    await user.save();
+
+    // Send verification email to new address
+    await sendVerificationEmail(email, verificationOTP, user.name);
+
+    res.json({ message: "Email updated and verification code sent" });
+  } catch (error) {
+    console.error("Update email error:", error);
+    res.status(500).json({ message: "Error updating email" });
+  }
+});
 
 // Configure multer for file upload
 const storage = multer.diskStorage({
@@ -105,20 +220,30 @@ router.post("/register", upload.single('profilePicture'), async (req, res) => {
     let user = await User.findOne({ email });
     if (user) return res.status(400).json({ message: "User already exists" });
 
+    // Generate verification OTP
+    const verificationOTP = generateOTP();
+    const verificationOTPExpiry = new Date(Date.now() + 600000); // 10 minutes
+
     // Hash password
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // Create user
+    // Create user with verification details
     user = new User({
       name,
       email,
       password: hashedPassword,
       phoneNumber: req.body.phoneNumber,
-      profilePicture: req.file ? `/uploads/profiles/${req.file.filename}` : undefined
+      profilePicture: req.file ? `/uploads/profiles/${req.file.filename}` : undefined,
+      verificationOTP,
+      verificationOTPExpiry,
+      isVerified: false
     });
     await user.save();
 
-    // Generate JWT token after registration with additional claims
+    // Send verification email
+    await sendVerificationEmail(email, verificationOTP, name);
+
+    // Generate JWT token for temporary access
     const token = jwt.sign(
       { 
         id: user._id,
@@ -129,26 +254,14 @@ router.post("/register", upload.single('profilePicture'), async (req, res) => {
       { expiresIn: "1h" }
     );
 
-    // Set session cookie
-    res.cookie("token", token, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "lax",
-      path: "/",
-      maxAge: 3600000 // 1 hour
-    });
-
-    // Log successful registration
-    console.log("New user registered:", { userId: user._id, email: user.email });
-
     res.status(201).json({ 
-      message: "Registration successful. Please log in to continue.",
+      message: "Registration successful. Please check your email for verification code.",
       success: true,
+      requiresVerification: true,
       user: { 
         id: user._id, 
         name: user.name, 
-        email: user.email,
-        isNewRegistration: true
+        email: user.email
       }
     });
   } catch (error) {

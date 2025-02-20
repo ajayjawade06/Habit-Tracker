@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { FiUser, FiMail, FiLock, FiEye, FiEyeOff } from "react-icons/fi";
+import { FiUser, FiMail, FiLock, FiEye, FiEyeOff, FiCheck } from "react-icons/fi";
 import { useAuth } from "../utils/AuthContext";
+import { useNotification } from "../context/NotificationContext";
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -15,16 +16,31 @@ const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
+  const { showNotification } = useNotification();
+  const [passwordRequirements, setPasswordRequirements] = useState({
+    length: false,
+    uppercase: false,
+    number: false,
+    special: false
+  });
   const navigate = useNavigate();
+
+  // Check password requirements in real-time
+  const checkPasswordRequirements = (password) => {
+    setPasswordRequirements({
+      length: password.length >= 8,
+      uppercase: /[A-Z]/.test(password),
+      number: /\d/.test(password),
+      special: /[@$!%*?&]/.test(password)
+    });
+  };
 
   const isValidEmail = (email) => {
     return /^[a-zA-Z0-9._%+-]+@(gmail\.com|yahoo\.com|outlook\.com|hotmail\.com|[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$/.test(email);
   };
 
-  const isValidPassword = (password) => {
-    return /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(password);
+  const isValidPassword = () => {
+    return Object.values(passwordRequirements).every(req => req);
   };
 
   const { register } = useAuth();
@@ -35,6 +51,10 @@ const Register = () => {
       ...prev,
       [name]: value
     }));
+
+    if (name === 'password') {
+      checkPasswordRequirements(value);
+    }
   };
 
   const handleFileChange = (e) => {
@@ -47,44 +67,42 @@ const Register = () => {
 
   const handleRegister = async (e) => {
     e.preventDefault();
-    setError("");
-    setSuccess("");
-
     if (!isValidEmail(formData.email)) {
-      setError("Please enter a valid email address");
+      showNotification("Please enter a valid email address", "error");
       return;
     }
 
     if (!isValidPassword(formData.password)) {
-      setError("Password must be at least 8 characters long, with one uppercase letter, one number, and one special character.");
+      showNotification("Please meet all password requirements", "error");
       return;
     }
 
     if (formData.password !== formData.confirmPassword) {
-      setError("Passwords do not match!");
+      showNotification("Passwords do not match!", "error");
       return;
     }
 
     setLoading(true);
     try {
       const formDataToSend = new FormData();
-      Object.keys(formData).forEach(key => {
-        if (key !== 'confirmPassword') {
-          formDataToSend.append(key, formData[key]);
-        }
-      });
+      formDataToSend.append('name', formData.name);
+      formDataToSend.append('email', formData.email);
+      formDataToSend.append('password', formData.password);
       if (profilePicture) {
         formDataToSend.append('profilePicture', profilePicture);
       }
 
-      const result = await register(formDataToSend);
-      setSuccess(result.message);
-      // Add a delay to show the success message before redirecting
-      setTimeout(() => {
-        navigate(result.redirectTo);
-      }, 2000);
+      await register(formDataToSend);
+      showNotification("Registration successful! Please verify your email.", "success");
+      navigate('/verify-email', { 
+        state: { 
+          email: formData.email,
+          isNewRegistration: true,
+          name: formData.name
+        }
+      });
     } catch (err) {
-      setError(err.response?.data?.message || "Registration failed");
+      showNotification(err.response?.data?.message || "Registration failed", "error");
     } finally {
       setLoading(false);
     }
@@ -102,15 +120,25 @@ const Register = () => {
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-2 text-center">Create Account</h2>
           <p className="text-sm sm:text-base text-white/80 text-center mb-6 sm:mb-8">Join us to get started</p>
 
-          {error && (
-            <div className="bg-red-500/20 backdrop-blur-sm p-4 rounded-xl border border-red-500/30 text-white mb-6 animate-shake">
-              {error}
-            </div>
-          )}
 
-          {success && (
-            <div className="bg-green-500/20 backdrop-blur-sm p-4 rounded-xl border border-green-500/30 text-white mb-6 animate-fade-in">
-              {success}
+          {/* Password Requirements Indicator */}
+          {formData.password && (
+            <div className="bg-white/10 backdrop-blur-sm p-4 rounded-xl border border-white/20 mb-6">
+              <h3 className="text-white mb-2 font-medium">Password Requirements:</h3>
+              <ul className="space-y-2">
+                <li className={`flex items-center ${passwordRequirements.length ? 'text-green-400' : 'text-white/60'}`}>
+                  <FiCheck className="mr-2" /> At least 8 characters
+                </li>
+                <li className={`flex items-center ${passwordRequirements.uppercase ? 'text-green-400' : 'text-white/60'}`}>
+                  <FiCheck className="mr-2" /> One uppercase letter
+                </li>
+                <li className={`flex items-center ${passwordRequirements.number ? 'text-green-400' : 'text-white/60'}`}>
+                  <FiCheck className="mr-2" /> One number
+                </li>
+                <li className={`flex items-center ${passwordRequirements.special ? 'text-green-400' : 'text-white/60'}`}>
+                  <FiCheck className="mr-2" /> One special character (@$!%*?&)
+                </li>
+              </ul>
             </div>
           )}
 
@@ -137,6 +165,7 @@ const Register = () => {
                 </label>
               </div>
             </div>
+
             <div className="relative group">
               <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                 <FiUser className="text-white/60 group-focus-within:text-white transition-colors duration-300" />

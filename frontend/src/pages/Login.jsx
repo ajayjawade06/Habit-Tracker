@@ -2,14 +2,15 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FiMail, FiLock, FiLogIn, FiEye, FiEyeOff } from "react-icons/fi";
 import { useAuth } from "../utils/AuthContext";
+import { useNotification } from "../context/NotificationContext";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
   const navigate = useNavigate();
+  const { showNotification } = useNotification();
 
   const isValidEmail = (email) => {
     return /^[a-zA-Z0-9._%+-]+@(gmail\.com|yahoo\.com|outlook\.com|hotmail\.com|[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$/.test(email);
@@ -20,10 +21,8 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setError("");
-
     if (!isValidEmail(email)) {
-      setError("Please enter a valid email address");
+      showNotification("Please enter a valid email address", "error");
       setLoading(false);
       return;
     }
@@ -31,10 +30,11 @@ const Login = () => {
     try {
       const response = await login(email, password);
       if (response.user) {
+        showNotification("Login successful! Redirecting...", "success");
         navigate("/dashboard");
       }
     } catch (err) {
-      setError(err.response?.data?.message || "Invalid credentials");
+      showNotification(err.response?.data?.message || "Invalid credentials", "error");
     } finally {
       setLoading(false);
     }
@@ -55,11 +55,6 @@ const Login = () => {
           </p>
 
           <form onSubmit={handleLogin} className="space-y-6">
-            {error && (
-              <div className="bg-red-500/20 backdrop-blur-sm p-4 rounded-xl border border-red-500/30 text-white mb-6 animate-shake">
-                {error}
-              </div>
-            )}
 
             <div className="relative group animate-fade-in" style={{ animationDelay: "200ms" }}>
               <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">

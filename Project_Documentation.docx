@@ -1,0 +1,185 @@
+Habit Tracking Application Documentation
+
+1. System Architecture
+The application follows a modern full-stack architecture with separate frontend and backend components:
+
+Frontend:
+- Built with React + Vite
+- Uses React Router for navigation
+- Implements Context API for state management
+- Features animated transitions using Framer Motion
+
+Backend:
+- Node.js with Express
+- MongoDB database
+- RESTful API architecture
+- JWT-based authentication
+
+2. Core Modules
+
+2.1 Authentication Module
+Files involved:
+- backend/routes/auth.js
+- backend/middleware/authMiddleware.js
+- frontend/src/utils/AuthContext.jsx
+- frontend/src/pages/Login.jsx
+- frontend/src/pages/Register.jsx
+- frontend/src/pages/VerifyEmail.jsx
+- frontend/src/pages/ForgotPassword.jsx
+- frontend/src/pages/ResetPassword.jsx
+
+Features:
+- User registration with email verification
+- Login with JWT authentication
+- Password reset functionality with OTP
+- Protected route middleware
+- Persistent authentication state
+
+2.2 User Management Module
+Files involved:
+- backend/models/User.js
+- frontend/src/pages/Profile.jsx
+- frontend/src/pages/UserInfo.jsx
+
+Features:
+- User profile management
+- Profile picture upload
+- Basic user information (name, email, phone)
+- Additional details (bio, address)
+- Email verification status
+
+2.3 Habit Tracking Module
+Files involved:
+- backend/models/Habit.js
+- backend/routes/habits.js
+- frontend/src/pages/Dashboard.jsx
+- frontend/src/pages/Progress.jsx
+
+Features:
+- Habit creation and management
+- Multiple habit categories (health, productivity, learning, etc.)
+- Frequency settings (daily, weekly)
+- Time-of-day preferences
+- Streak tracking
+- Completion history
+- Progress visualization
+
+2.4 Gamification System
+Integrated within the Habit model:
+- Streak tracking (current and longest)
+- Badge system with multiple achievements:
+  * Week Warrior (7-day streak)
+  * Monthly Master (30-day streak)
+  * Century Club (100 completions)
+- Progress statistics
+
+2.5 Notification System
+Files involved:
+- frontend/src/components/Notification.jsx
+- frontend/src/context/NotificationContext.jsx
+
+Features:
+- Toast notifications for user feedback
+- Context-based notification management
+- Different notification types (success, error, info)
+
+3. File Relationships and Dependencies
+
+3.1 Backend Structure
+- server.js: Main entry point, sets up middleware and routes
+- routes/: Contains all API endpoints
+  * auth.js: Authentication routes
+  * habits.js: Habit management routes
+  * dashboard.js: Dashboard data routes
+- models/: Database schemas
+  * User.js: User data structure
+  * Habit.js: Habit data structure
+- middleware/: Custom middleware
+  * authMiddleware.js: JWT verification
+
+3.2 Frontend Structure
+- App.jsx: Main component, routing setup
+- pages/: Individual page components
+- components/: Reusable UI components
+- context/: State management
+- utils/: Helper functions and authentication
+
+4. Key Features and Implementation Details
+
+4.1 Authentication Flow
+1. User registers with email
+2. Verification OTP sent to email
+3. User verifies email
+4. Login generates JWT token
+5. Token stored in cookies
+6. Protected routes check token validity
+
+4.2 Habit Tracking Implementation
+1. Habits stored with user reference
+2. Daily/weekly tracking options
+3. Automatic streak calculation
+4. Badge award system
+5. Progress visualization
+6. Historical data tracking
+
+4.3 Data Models
+
+User Model:
+- Basic Info: name, email, password
+- Profile: picture, phone, bio, address
+- Verification: isVerified, OTP fields
+- Security: password reset fields
+
+Habit Model:
+- Core: title, description, category
+- Tracking: frequency, timeOfDay
+- Progress: currentStreak, longestStreak
+- History: completionHistory, badges
+- Metadata: startDate, lastCompleted
+
+5. Security Features
+
+5.1 Authentication Security
+- JWT-based authentication
+- Password hashing
+- Email verification
+- OTP for password reset
+- Protected routes
+- CORS configuration
+
+5.2 Data Security
+- MongoDB indexes for optimization
+- Automatic OTP expiration
+- User data validation
+- Protected API endpoints
+
+6. Frontend Features
+
+6.1 User Interface
+- Responsive design
+- Animated page transitions
+- Protected route handling
+- Toast notifications
+- Form validation
+
+6.2 State Management
+- Context API for global state
+- Authentication state
+- Notification system
+- User preferences
+
+7. Deployment Considerations
+
+7.1 Environment Variables
+- MongoDB connection string
+- JWT secret
+- Email service credentials
+- Frontend URL
+- Port configuration
+
+7.2 Static File Handling
+- Profile picture storage
+- File upload configuration
+- Static file serving
+
+This documentation provides a comprehensive overview of the application's architecture, modules, and functionality. The modular design allows for easy maintenance and future expansions while maintaining clean separation of concerns between different components.

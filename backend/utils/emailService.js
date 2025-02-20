@@ -7,13 +7,12 @@ dotenv.config();
 const transporter = nodemailer.createTransport({
     host: 'smtp.gmail.com',
     port: 465,
-    secure: true, // use SSL
+    secure: true,
     auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASSWORD
     },
     tls: {
-        // do not fail on invalid certs
         rejectUnauthorized: false
     }
 });
@@ -32,25 +31,78 @@ export const generateOTP = () => {
     return Math.floor(100000 + Math.random() * 900000).toString();
 };
 
-// Send OTP email
-export const sendOTPEmail = async (email, otp) => {
+// Send Registration Verification Email
+export const sendVerificationEmail = async (email, otp, name) => {
     try {
         const mailOptions = {
             from: process.env.EMAIL_USER,
             to: email,
-            subject: 'Password Reset OTP',
+            subject: 'Welcome to Habit Tracker - Verify Your Email',
             html: `
-                <h1>Password Reset Request</h1>
-                <p>Your OTP for password reset is: <strong>${otp}</strong></p>
-                <p>This OTP will expire in 10 minutes.</p>
-                <p>If you didn't request this, please ignore this email.</p>
+                <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f9f9f9; border-radius: 10px;">
+                    <h1 style="color: #4F46E5; text-align: center; margin-bottom: 30px;">Welcome to Habit Tracker! 🎉</h1>
+                    
+                    <div style="background-color: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                        <h2 style="color: #333; margin-bottom: 20px;">Hi ${name}!</h2>
+                        
+                        <p style="color: #666; line-height: 1.6;">We're excited to have you join our community! To get started, please verify your email address by entering the following verification code:</p>
+                        
+                        <div style="background-color: #4F46E5; color: white; font-size: 24px; font-weight: bold; text-align: center; padding: 15px; margin: 20px 0; border-radius: 6px;">
+                            ${otp}
+                        </div>
+                        
+                        <p style="color: #666; line-height: 1.6;">This code will expire in 10 minutes for security purposes.</p>
+                        
+                        <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee;">
+                            <p style="color: #888; font-size: 14px;">If you didn't create an account with Habit Tracker, you can safely ignore this email.</p>
+                        </div>
+                    </div>
+                </div>
             `
         };
 
         await transporter.sendMail(mailOptions);
         return true;
     } catch (error) {
-        console.error('Error sending email:', error);
+        console.error('Error sending verification email:', error);
         return false;
     }
 };
+
+// Send OTP email for password reset
+export const sendOTPEmail = async (email, otp) => {
+    try {
+        const mailOptions = {
+            from: process.env.EMAIL_USER,
+            to: email,
+            subject: 'Password Reset Request - Habit Tracker',
+            html: `
+                <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f9f9f9; border-radius: 10px;">
+                    <h1 style="color: #4F46E5; text-align: center; margin-bottom: 30px;">Password Reset Request</h1>
+                    
+                    <div style="background-color: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                        <p style="color: #666; line-height: 1.6;">We received a request to reset your password. Here's your one-time password (OTP):</p>
+                        
+                        <div style="background-color: #4F46E5; color: white; font-size: 24px; font-weight: bold; text-align: center; padding: 15px; margin: 20px 0; border-radius: 6px;">
+                            ${otp}
+                        </div>
+                        
+                        <p style="color: #666; line-height: 1.6;">This code will expire in 10 minutes.</p>
+                        
+                        <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee;">
+                            <p style="color: #888; font-size: 14px;">If you didn't request a password reset, please ignore this email or contact support if you have concerns.</p>
+                        </div>
+                    </div>
+                </div>
+            `
+        };
+
+        await transporter.sendMail(mailOptions);
+        return true;
+    } catch (error) {
+        console.error('Error sending OTP email:', error);
+        return false;
+    }
+};
+
+export default { generateOTP, sendOTPEmail, sendVerificationEmail };
