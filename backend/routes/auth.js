@@ -299,19 +299,47 @@ router.post("/login", async (req, res) => {
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) return res.status(400).json({ message: "Invalid credentials" });
 
+    // Check if email is verified
+    if (!user.isVerified) {
+      // Generate new OTP for verification
+      const verificationOTP = generateOTP();
+      user.verificationOTP = verificationOTP;
+      user.verificationOTPExpiry = new Date(Date.now() + 600000); // 10 minutes
+      await user.save();
+
+      // Send verification email
+      await sendVerificationEmail(email, verificationOTP, user.name);
+
+      return res.status(403).json({ 
+        message: "Email not verified. A new verification code has been sent to your email.",
+        requiresVerification: true,
+        email: user.email
+      });
+    }
+
     // Generate JWT token
-    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "1h" });
-// Fix cookie settings in login route
-res.cookie("token", token, {
-  httpOnly: true,
-  secure: false, 
-  sameSite: "lax", 
-  path: "/",
-  maxAge: 3600000 // 1 hour
-});
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "24h" }); // Extend token expiry
 
+    // Set cookie with proper settings
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "strict",
+      path: "/",
+      maxAge: 86400000 // 24 hours
+    });
 
-    res.json({ message: "Login successful", user: { id: user._id, name: user.name, email: user.email } });
+    // Return token in response for local storage
+    res.json({ 
+      message: "Login successful", 
+      token, // Include token in response
+      user: { 
+        id: user._id, 
+        name: user.name, 
+        email: user.email,
+        isVerified: user.isVerified
+      }
+    });
   } catch (error) {
     console.error("Login error:", error);
     res.status(500).json({ message: "Server error during login" });

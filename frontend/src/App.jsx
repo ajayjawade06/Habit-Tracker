@@ -59,54 +59,54 @@ const AppContent = () => {
     <NotificationProvider>
       <AuthProvider>
         <AnimatePresence mode="wait">
-        <Routes location={location} key={location.pathname}>
-          <Route path="/" element={<PageTransition><Home /></PageTransition>} />
-          <Route path="/login" element={<PageTransition><Login /></PageTransition>} />
-          <Route path="/register" element={<PageTransition><Register /></PageTransition>} />
-          <Route path="/verify-email" element={<PageTransition><VerifyEmail /></PageTransition>} />
-          <Route path="/forgot-password" element={<PageTransition><ForgotPassword /></PageTransition>} />
-          <Route path="/reset-password" element={<PageTransition><ResetPassword /></PageTransition>} />
-          <Route
-            path="/dashboard"
-            element={
-              <ProtectedRoute>
-                <PageTransition>
-                  <Dashboard />
-                </PageTransition>
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/progress"
-            element={
-              <ProtectedRoute>
-                <PageTransition>
-                  <Progress />
-                </PageTransition>
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/profile"
-            element={
-              <ProtectedRoute>
-                <PageTransition>
-                  <Profile />
-                </PageTransition>
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/user-info"
-            element={
-              <ProtectedRoute>
-                <PageTransition>
-                  <UserInfo />
-                </PageTransition>
-              </ProtectedRoute>
-            }
-          />
-        </Routes>
+          <Routes location={location} key={location.pathname}>
+            <Route path="/" element={<PageTransition><Home /></PageTransition>} />
+            <Route path="/login" element={<PageTransition><Login /></PageTransition>} />
+            <Route path="/register" element={<PageTransition><Register /></PageTransition>} />
+            <Route path="/verify-email" element={<PageTransition><VerifyEmail /></PageTransition>} />
+            <Route path="/forgot-password" element={<PageTransition><ForgotPassword /></PageTransition>} />
+            <Route path="/reset-password" element={<PageTransition><ResetPassword /></PageTransition>} />
+            <Route
+              path="/dashboard"
+              element={
+                <ProtectedRoute>
+                  <PageTransition>
+                    <Dashboard />
+                  </PageTransition>
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/progress"
+              element={
+                <ProtectedRoute>
+                  <PageTransition>
+                    <Progress />
+                  </PageTransition>
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/profile"
+              element={
+                <ProtectedRoute>
+                  <PageTransition>
+                    <Profile />
+                  </PageTransition>
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/user-info"
+              element={
+                <ProtectedRoute>
+                  <PageTransition>
+                    <UserInfo />
+                  </PageTransition>
+                </ProtectedRoute>
+              }
+            />
+          </Routes>
         </AnimatePresence>
       </AuthProvider>
     </NotificationProvider>

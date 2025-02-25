@@ -1,8 +1,59 @@
 import express from "express";
 import Habit from "../models/Habit.js";
+import User from "../models/User.js";
 import authMiddleware from "../middleware/authMiddleware.js";
+import { sendHabitReminderEmail } from "../utils/emailService.js";
 
 const router = express.Router();
+
+// Helper function to check if a habit is available for completion
+const isHabitAvailable = (habit) => {
+  if (!habit.lastCompleted) return true;
+  
+  const now = new Date();
+  const lastCompleted = new Date(habit.lastCompleted);
+  
+  // Check if it's a new day
+  return (
+    lastCompleted.getDate() !== now.getDate() ||
+    lastCompleted.getMonth() !== now.getMonth() ||
+    lastCompleted.getFullYear() !== now.getFullYear()
+  );
+};
+
+// Helper function to check if it's the right time of day
+const isRightTimeOfDay = (timeOfDay) => {
+  const hour = new Date().getHours();
+  
+  switch(timeOfDay) {
+    case 'morning':
+      return hour >= 5 && hour < 12;
+    case 'afternoon':
+      return hour >= 12 && hour < 17;
+    case 'evening':
+      return hour >= 17 && hour < 22;
+    case 'anytime':
+      return true;
+    default:
+      return true;
+  }
+};
+
+// Send reminder for available habits
+const sendHabitReminders = async (habit, user) => {
+  try {
+    if (isHabitAvailable(habit) && isRightTimeOfDay(habit.timeOfDay)) {
+      await sendHabitReminderEmail(
+        user.email,
+        habit.title,
+        habit.timeOfDay,
+        user.name
+      );
+    }
+  } catch (error) {
+    console.error('Error sending habit reminder:', error);
+  }
+};
 
 // Create a new habit
 router.post("/", authMiddleware, async (req, res) => {
@@ -19,6 +70,11 @@ router.post("/", authMiddleware, async (req, res) => {
     });
 
     await habit.save();
+
+    // Send initial reminder if appropriate
+    const user = await User.findById(req.user.id);
+    await sendHabitReminders(habit, user);
+
     res.status(201).json(habit);
   } catch (error) {
     console.error("Error creating habit:", error);
@@ -26,17 +82,45 @@ router.post("/", authMiddleware, async (req, res) => {
   }
 });
 
-// Get all habits for the user
+// Get all habits for the user and check reminders
 router.get("/", authMiddleware, async (req, res) => {
   try {
     const habits = await Habit.find({ 
       user: req.user.id,
       active: true 
     }).sort({ createdAt: -1 });
+
+    // Get user details for email
+    const user = await User.findById(req.user.id);
+    
+    // Check and send reminders for available habits using Promise.all
+    await Promise.all(habits.map(habit => sendHabitReminders(habit, user)));
+
     res.json(habits);
   } catch (error) {
     console.error("Error fetching habits:", error);
     res.status(500).json({ message: "Error fetching habits" });
+  }
+});
+
+// Check and send reminders for all habits
+router.post("/check-reminders", authMiddleware, async (req, res) => {
+  try {
+    const habits = await Habit.find({ 
+      user: req.user.id,
+      active: true 
+    });
+
+    const user = await User.findById(req.user.id);
+    
+    // Send reminders for all available habits
+    const reminderPromises = habits.map(habit => sendHabitReminders(habit, user));
+    await Promise.all(reminderPromises);
+
+    res.json({ message: "Reminders checked and sent successfully" });
+  } catch (error) {
+    console.error("Error checking reminders:", error);
+    res.status(500).json({ message: "Error checking reminders" });
   }
 });
 
@@ -97,6 +181,20 @@ router.post("/:id/complete", authMiddleware, async (req, res) => {
     const newBadges = habit.checkAndAwardBadges();
     
     await habit.save();
+
+    // Get user for next day reminder
+    const user = await User.findById(req.user.id);
+    
+    // Schedule reminder for next day if appropriate
+    const tomorrow = new Date(completionDate);
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    if (habit.frequency === 'daily') {
+      // Reset lastCompleted to trigger availability check for next day
+      const tempLastCompleted = habit.lastCompleted;
+      habit.lastCompleted = null;
+      await sendHabitReminders(habit, user);
+      habit.lastCompleted = tempLastCompleted;
+    }
     
     res.json({
       habit,

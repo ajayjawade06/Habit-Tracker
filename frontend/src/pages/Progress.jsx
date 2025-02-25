@@ -44,14 +44,14 @@ const Progress = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-500">
+      <div className="min-h-screen flex items-center justify-center bg-black">
         <div className="animate-spin h-12 w-12 border-4 border-white rounded-full border-t-transparent"></div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-500 p-3 sm:p-4 lg:p-6">
+    <div className="min-h-screen bg-black p-3 sm:p-4 lg:p-6">
       <div className="max-w-6xl mx-auto">
         {error && (
           <div className="bg-red-500/20 backdrop-blur-sm p-3 sm:p-4 rounded-xl border border-red-500/30 text-white mb-4 sm:mb-6 animate-shake">
@@ -59,12 +59,12 @@ const Progress = () => {
           </div>
         )}
 
-        <div className="bg-white/10 backdrop-blur-lg rounded-2xl shadow-2xl p-4 sm:p-6 lg:p-8">
+        <div className="bg-white/5 backdrop-blur-sm rounded-xl shadow-2xl p-4 sm:p-6 lg:p-8 border border-white/10 hover:bg-white/10 transition-all duration-300">
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 sm:gap-0 mb-6 sm:mb-8">
             <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white">Your Progress</h1>
               <button
                 onClick={() => navigate("/dashboard")}
-                className="px-4 sm:px-6 py-2 sm:py-3 bg-white/20 hover:bg-white/30 text-white rounded-xl transition-all duration-300 flex items-center text-sm sm:text-base"
+                className="px-4 sm:px-6 py-2 sm:py-3 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-xl font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/30 flex items-center text-sm sm:text-base"
               >
                 <FiArrowLeft className="mr-2" />
                 Back to Dashboard
@@ -74,7 +74,7 @@ const Progress = () => {
           {stats && (
             <>
               <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6 mb-6 sm:mb-8">
-                <div className="bg-white/10 p-4 sm:p-6 rounded-lg">
+                <div className="bg-white/5 backdrop-blur-sm p-4 sm:p-6 rounded-xl border border-white/10 hover:bg-white/10 transition-all duration-300">
                   <h3 className="text-white font-semibold mb-2 text-sm sm:text-base">Total Habits</h3>
                   <p className="text-2xl sm:text-3xl lg:text-4xl text-white">{stats.overallStats.totalHabits}</p>
                 </div>
@@ -108,7 +108,7 @@ const Progress = () => {
                         </div>
                         <div className="w-full bg-white/10 rounded-full h-2">
                           <div
-                            className="bg-gradient-to-r from-emerald-500 to-teal-500 h-2 rounded-full"
+                            className="bg-gradient-to-r from-blue-500 to-purple-500 h-2 rounded-full"
                             style={{ width: `${Math.min(100, (data.completed / data.total) * 100)}%` }}
                           ></div>
                         </div>
@@ -117,7 +117,7 @@ const Progress = () => {
                   </div>
                 </div>
 
-                <div className="bg-white/10 p-4 sm:p-6 rounded-lg">
+                <div className="bg-white/5 backdrop-blur-sm p-4 sm:p-6 rounded-xl border border-white/10 hover:bg-white/10 transition-all duration-300">
                   <h3 className="text-lg sm:text-xl font-semibold text-white mb-3 sm:mb-4">Top Performing Habits</h3>
                   <div className="space-y-4">
                     {stats.habits
@@ -133,7 +133,7 @@ const Progress = () => {
                           </div>
                           <div className="w-full bg-white/10 rounded-full h-2">
                             <div
-                              className="bg-gradient-to-r from-emerald-500 to-teal-500 h-2 rounded-full"
+                              className="bg-gradient-to-r from-blue-500 to-purple-500 h-2 rounded-full"
                               style={{ width: `${habit.completionRate}%` }}
                             ></div>
                           </div>
@@ -143,7 +143,7 @@ const Progress = () => {
                 </div>
               </div>
 
-              <div className="bg-white/10 p-4 sm:p-6 rounded-lg">
+              <div className="bg-white/5 backdrop-blur-sm p-4 sm:p-6 rounded-xl border border-white/10 hover:bg-white/10 transition-all duration-300">
                 <h3 className="text-lg sm:text-xl font-semibold text-white mb-3 sm:mb-4">Badges Collection</h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
                   {stats.habits.flatMap(habit => 

@@ -79,12 +79,12 @@ const Profile = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-500 px-4 py-6">
+    <div className="min-h-screen bg-black px-4 py-6">
       <div className="max-w-4xl mx-auto">
         <div className="flex justify-between items-center mb-8">
           <button
             onClick={() => navigate('/dashboard')}
-            className="flex items-center px-4 py-2 bg-white/10 hover:bg-white/20 rounded-xl text-white transition-all duration-300"
+            className="flex items-center px-4 py-2 bg-white/5 hover:bg-white/10 rounded-xl text-white transition-all duration-300 border border-white/10"
           >
             <FiArrowLeft className="mr-2" />
             Back to Dashboard
@@ -92,20 +92,20 @@ const Profile = () => {
         </div>
         
         <div className="relative py-3 w-full max-w-md mx-auto sm:max-w-xl">
-          <div className="relative px-4 py-8 bg-white/10 backdrop-blur-lg shadow-2xl rounded-3xl sm:p-10 border border-white/20">
+          <div className="relative px-4 py-8 bg-white/5 backdrop-blur-sm shadow-2xl rounded-xl sm:p-10 border border-white/10 hover:bg-white/10 transition-all duration-300">
             <div className="w-full">
               <div className="space-y-6">
                 <div className="py-8 text-base leading-6 space-y-4 text-white sm:text-lg sm:leading-7">
                   <h2 className="text-3xl font-bold mb-8 text-center text-white">Edit Profile</h2>
                   {message && (
-                    <div className="mb-4 p-3 rounded-xl bg-emerald-500/20 border border-emerald-500/30 backdrop-blur-sm text-white">
+                    <div className="mb-4 p-3 rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm text-white hover:bg-white/10 transition-all duration-300">
                       {message}
                     </div>
                   )}
                   <form onSubmit={handleSubmit} className="space-y-6 sm:space-y-8">
                     <div className="flex justify-center mb-6 sm:mb-8">
                       <div className="relative group">
-                        <div className="absolute -inset-0.5 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-full opacity-50 group-hover:opacity-100 transition-opacity duration-300 blur"></div>
+                        <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full opacity-50 group-hover:opacity-100 transition-opacity duration-300 blur"></div>
                         <img
                           src={previewUrl || 'https://via.placeholder.com/150'}
                           alt="Profile"
@@ -133,7 +133,7 @@ const Profile = () => {
                           name="name"
                           value={formData.name}
                           onChange={handleInputChange}
-                          className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-white/5 backdrop-blur-sm border border-white/20 rounded-xl text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/50 transition-all duration-300 hover:bg-white/10"
+                          className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/30 transition-all duration-300 hover:bg-white/10"
                         />
                       </div>
 
@@ -144,7 +144,7 @@ const Profile = () => {
                           name="phoneNumber"
                           value={formData.phoneNumber}
                           onChange={handleInputChange}
-                          className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-white/5 backdrop-blur-sm border border-white/20 rounded-xl text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/50 transition-all duration-300 hover:bg-white/10"
+                          className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/30 transition-all duration-300 hover:bg-white/10"
                         />
                       </div>
 
@@ -155,7 +155,7 @@ const Profile = () => {
                           value={formData.bio}
                           onChange={handleInputChange}
                           rows="3"
-                          className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-white/5 backdrop-blur-sm border border-white/20 rounded-xl text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/50 transition-all duration-300 hover:bg-white/10"
+                          className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/30 transition-all duration-300 hover:bg-white/10"
                         />
                       </div>
 
@@ -166,13 +166,13 @@ const Profile = () => {
                           name="address"
                           value={formData.address}
                           onChange={handleInputChange}
-                          className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-white/5 backdrop-blur-sm border border-white/20 rounded-xl text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/50 transition-all duration-300 hover:bg-white/10"
+                          className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/30 transition-all duration-300 hover:bg-white/10"
                         />
                       </div>
 
                       <button
                         type="submit"
-                        className="w-full flex justify-center py-2 sm:py-3 px-4 sm:px-6 rounded-xl text-white bg-gradient-to-r from-emerald-500 to-teal-500 hover:opacity-90 transition-all duration-300 shadow-lg shadow-emerald-500/20 font-medium"
+                        className="w-full flex justify-center py-2 sm:py-3 px-4 sm:px-6 rounded-xl text-white bg-gradient-to-r from-blue-500 to-purple-500 font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/30"
                       >
                         Save Changes
                       </button>

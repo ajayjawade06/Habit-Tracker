@@ -9,17 +9,20 @@ const Home = () => {
     {
       icon: <FiActivity className="w-6 h-6 text-emerald-400" />,
       title: "Track Daily Habits",
-      description: "Build lasting habits with daily tracking and reminders. Stay consistent and achieve your goals."
+      description: "Build lasting habits with daily tracking and reminders. Stay consistent and achieve your goals.",
+      image: "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?auto=format&fit=crop&w=500&q=80"
     },
     {
       icon: <FiAward className="w-6 h-6 text-yellow-400" />,
       title: "Earn Achievements",
-      description: "Unlock badges and achievements as you maintain streaks and reach milestones."
+      description: "Unlock badges and achievements as you maintain streaks and reach milestones.",
+      image: "https://images.unsplash.com/photo-1567942712661-82b9b407abbf?auto=format&fit=crop&w=500&q=80"
     },
     {
       icon: <FiTrendingUp className="w-6 h-6 text-blue-400" />,
       title: "Track Progress",
-      description: "Visualize your progress with detailed reports and analytics. See your growth over time."
+      description: "Visualize your progress with detailed reports and analytics. See your growth over time.",
+      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=500&q=80"
     }
   ];
 
@@ -27,19 +30,6 @@ const Home = () => {
     initial: { scale: 1 },
     hover: { scale: 1.05 },
     tap: { scale: 0.95 }
-  };
-
-  const characterVariants = {
-    initial: { y: 50, opacity: 0 },
-    animate: { 
-      y: 0, 
-      opacity: 1,
-      transition: {
-        type: "spring",
-        stiffness: 100,
-        damping: 10
-      }
-    }
   };
 
   const containerVariants = {
@@ -65,41 +55,16 @@ const Home = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-500 overflow-hidden">
-      {/* Hero Section with Character */}
-      <div className="container mx-auto px-3 sm:px-4 py-8 sm:py-12 md:py-16 relative">
+    <div className="min-h-screen bg-black flex flex-col">
+      {/* Hero Section */}
+      <div className="container mx-auto px-3 sm:px-4 relative">
         <motion.div 
           className="text-center"
           initial="initial"
           animate="animate"
           variants={containerVariants}
         >
-          {/* Welcoming Character */}
-          <motion.div
-            className="mb-8"
-            variants={characterVariants}
-          >
-            <div className="w-32 h-32 mx-auto relative">
-              <div className="absolute inset-0 bg-white/10 rounded-full animate-pulse"></div>
-              <svg
-                viewBox="0 0 200 200"
-                className="w-full h-full drop-shadow-lg"
-              >
-                {/* Simple character face */}
-                <circle cx="100" cy="100" r="90" fill="#FFF" />
-                <circle cx="70" cy="80" r="10" fill="#333" /> {/* Left eye */}
-                <circle cx="130" cy="80" r="10" fill="#333" /> {/* Right eye */}
-                <path
-                  d="M 70 120 Q 100 150 130 120"
-                  stroke="#333"
-                  strokeWidth="8"
-                  fill="none"
-                /> {/* Smile */}
-              </svg>
-            </div>
-          </motion.div>
-
-          <motion.h1 
+          <motion.h1
             className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6"
             variants={itemVariants}
           >
@@ -117,7 +82,7 @@ const Home = () => {
           >
             <motion.button
               onClick={() => navigate("/register")}
-              className="px-6 sm:px-8 py-2.5 sm:py-3 bg-white text-indigo-600 rounded-xl font-semibold transition-all duration-300 text-sm sm:text-base"
+              className="px-6 sm:px-8 py-2.5 sm:py-3 bg-white text-black rounded-xl font-semibold transition-all duration-300 text-sm sm:text-base"
               variants={buttonVariants}
               whileHover="hover"
               whileTap="tap"
@@ -145,22 +110,32 @@ const Home = () => {
         viewport={{ once: true }}
         variants={containerVariants}
       >
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-10">
           {features.map((feature, index) => (
             <motion.div
               key={index}
-              className="bg-white/10 backdrop-blur-sm rounded-xl p-4 sm:p-6 border border-white/10 hover:bg-white/20 transition-all duration-300"
+              className="bg-white/5 backdrop-blur-sm rounded-xl overflow-hidden transition-all duration-300 hover:bg-white/10"
               variants={itemVariants}
             >
-              <div className="bg-white/10 rounded-lg w-12 h-12 flex items-center justify-center mb-4">
-                {feature.icon}
+              <div className="h-48 relative overflow-hidden">
+                <img 
+                  src={feature.image} 
+                  alt={feature.title}
+                  className="w-full h-full object-cover transform hover:scale-110 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
               </div>
-              <h3 className="text-lg sm:text-xl font-semibold text-white mb-2">
-                {feature.title}
-              </h3>
-              <p className="text-white/70">
-                {feature.description}
-              </p>
+              <div className="p-6">
+                <div className="bg-white/10 rounded-lg w-12 h-12 flex items-center justify-center mb-4">
+                  {feature.icon}
+                </div>
+                <h3 className="text-lg sm:text-xl font-semibold text-white mb-2">
+                  {feature.title}
+                </h3>
+                <p className="text-white/70">
+                  {feature.description}
+                </p>
+              </div>
             </motion.div>
           ))}
         </div>
@@ -168,22 +143,22 @@ const Home = () => {
 
       {/* Stats Section */}
       <motion.div 
-        className="container mx-auto px-3 sm:px-4 py-8 sm:py-12 md:py-16"
+        className="container mx-auto px-3 sm:px-4 py-6 sm:py-8 md:py-12"
         initial="initial"
         whileInView="animate"
         viewport={{ once: true }}
         variants={containerVariants}
       >
         <motion.div 
-          className="bg-white/5 backdrop-blur-sm rounded-xl p-4 sm:p-6 lg:p-8 border border-white/10"
+          className="bg-white/5 backdrop-blur-sm rounded-xl p-8 border border-white/10"
           variants={itemVariants}
         >
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             <motion.div 
               className="text-center"
               variants={itemVariants}
             >
-              <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-2">🔥 Streaks</div>
+              <div className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-2">🔥 Streaks</div>
               <p className="text-white/70">
                 Build momentum with daily streaks. Watch your habits grow stronger each day.
               </p>
@@ -192,7 +167,7 @@ const Home = () => {
               className="text-center"
               variants={itemVariants}
             >
-              <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-2">⭐ Badges</div>
+              <div className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-2">⭐ Badges</div>
               <p className="text-white/70">
                 Earn badges for your achievements. Show off your dedication and progress.
               </p>
@@ -201,7 +176,7 @@ const Home = () => {
               className="text-center"
               variants={itemVariants}
             >
-              <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-2">📊 Insights</div>
+              <div className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-2">📊 Insights</div>
               <p className="text-white/70">
                 Track your progress with detailed analytics and performance reports.
               </p>
@@ -212,7 +187,7 @@ const Home = () => {
 
       {/* CTA Section */}
       <motion.div 
-        className="container mx-auto px-3 sm:px-4 py-8 sm:py-12 md:py-16 text-center"
+        className="container mx-auto px-3 sm:px-4 py-6 sm:py-8 md:py-12 text-center"
         initial="initial"
         whileInView="animate"
         viewport={{ once: true }}
@@ -232,7 +207,7 @@ const Home = () => {
         </motion.p>
         <motion.button
           onClick={() => navigate("/register")}
-          className="px-6 sm:px-8 py-2.5 sm:py-3 bg-gradient-to-r from-emerald-500 to-teal-500 text-white rounded-xl font-semibold transition-all duration-300 text-sm sm:text-base"
+          className="px-8 py-3 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-xl font-semibold transition-all duration-300 text-base"
           variants={buttonVariants}
           whileHover="hover"
           whileTap="tap"

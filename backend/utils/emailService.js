@@ -105,4 +105,46 @@ export const sendOTPEmail = async (email, otp) => {
     }
 };
 
-export default { generateOTP, sendOTPEmail, sendVerificationEmail };
+// Send habit reminder email
+export const sendHabitReminderEmail = async (email, habitTitle, timeOfDay, userName) => {
+    try {
+        const mailOptions = {
+            from: process.env.EMAIL_USER,
+            to: email,
+            subject: '🎯 Time to Complete Your Habit! - Habit Tracker',
+            html: `
+                <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f9f9f9; border-radius: 10px;">
+                    <h1 style="color: #4F46E5; text-align: center; margin-bottom: 30px;">Habit Reminder</h1>
+                    
+                    <div style="background-color: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                        <h2 style="color: #333; margin-bottom: 20px;">Hi ${userName}!</h2>
+                        
+                        <p style="color: #666; line-height: 1.6;">It's time for your ${timeOfDay} habit:</p>
+                        
+                        <div style="background-color: #4F46E5; color: white; font-size: 20px; text-align: center; padding: 15px; margin: 20px 0; border-radius: 6px;">
+                            ${habitTitle}
+                        </div>
+                        
+                        <p style="color: #666; line-height: 1.6;">Your habit is ready to be completed! Head over to your dashboard to mark it as done and keep your streak going! 💪</p>
+                        
+                        <div style="text-align: center; margin: 30px 0;">
+                            <a href="/dashboard" style="background-color: #4F46E5; color: white; text-decoration: none; padding: 12px 25px; border-radius: 6px; font-weight: bold;">Go to Dashboard</a>
+                        </div>
+                        
+                        <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee;">
+                            <p style="color: #888; font-size: 14px;">Keep up the great work! Every completion brings you closer to your goals.</p>
+                        </div>
+                    </div>
+                </div>
+            `
+        };
+
+        await transporter.sendMail(mailOptions);
+        return true;
+    } catch (error) {
+        console.error('Error sending habit reminder email:', error);
+        return false;
+    }
+};
+
+export default { generateOTP, sendOTPEmail, sendVerificationEmail, sendHabitReminderEmail };
