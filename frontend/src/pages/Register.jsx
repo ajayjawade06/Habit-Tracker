@@ -114,7 +114,6 @@ const Register = () => {
       setLoading(false);
     }
   };
-
   return (
     <div className="h-screen grid md:grid-cols-12 bg-black overflow-hidden">
       {/* Left side - Illustration */}

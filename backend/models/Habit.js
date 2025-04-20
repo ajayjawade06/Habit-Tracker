@@ -108,24 +108,72 @@ HabitSchema.methods.isCompletedToday = function() {
 // Method to update streak
 HabitSchema.methods.updateStreak = function(completionDate) {
   const today = new Date(completionDate);
-  const yesterday = new Date(today);
-  yesterday.setDate(yesterday.getDate() - 1);
-
-  const wasCompletedYesterday = this.completionHistory.some(completion => {
-    const completionDate = new Date(completion.date);
+  
+  // If already completed today, don't update streak again
+  const alreadyCompletedToday = this.completionHistory.some(completion => {
+    if (!completion.completed) return false;
+    
+    const compDate = new Date(completion.date);
     return (
-      completionDate.getDate() === yesterday.getDate() &&
-      completionDate.getMonth() === yesterday.getMonth() &&
-      completionDate.getFullYear() === yesterday.getFullYear()
+      compDate.getDate() === today.getDate() &&
+      compDate.getMonth() === today.getMonth() &&
+      compDate.getFullYear() === today.getFullYear() &&
+      // Exclude the current completion we're processing
+      compDate.getTime() < today.getTime()
     );
   });
-
-  if (wasCompletedYesterday) {
-    this.currentStreak += 1;
-  } else {
-    this.currentStreak = 1;
+  
+  if (alreadyCompletedToday) {
+    return; // Already completed today, no need to update streak
   }
-
+  
+  if (this.frequency === 'daily') {
+    // For daily habits, check if completed yesterday
+    const yesterday = new Date(today);
+    yesterday.setDate(yesterday.getDate() - 1);
+    
+    const wasCompletedYesterday = this.completionHistory.some(completion => {
+      if (!completion.completed) return false;
+      
+      const compDate = new Date(completion.date);
+      return (
+        compDate.getDate() === yesterday.getDate() &&
+        compDate.getMonth() === yesterday.getMonth() &&
+        compDate.getFullYear() === yesterday.getFullYear()
+      );
+    });
+    
+    if (wasCompletedYesterday) {
+      this.currentStreak += 1;
+    } else {
+      this.currentStreak = 1;
+    }
+  } else if (this.frequency === 'weekly') {
+    // For weekly habits, check if completed in the last week
+    const oneWeekAgo = new Date(today);
+    oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
+    
+    // Find the most recent completion before today
+    const recentCompletions = this.completionHistory
+      .filter(completion => completion.completed && new Date(completion.date) < today)
+      .sort((a, b) => new Date(b.date) - new Date(a.date));
+    
+    if (recentCompletions.length > 0) {
+      const lastCompletionDate = new Date(recentCompletions[0].date);
+      
+      // Check if the last completion was within the last week
+      if (lastCompletionDate >= oneWeekAgo) {
+        this.currentStreak += 1;
+      } else {
+        this.currentStreak = 1;
+      }
+    } else {
+      // First completion
+      this.currentStreak = 1;
+    }
+  }
+  
+  // Update longest streak if current streak is greater
   if (this.currentStreak > this.longestStreak) {
     this.longestStreak = this.currentStreak;
   }

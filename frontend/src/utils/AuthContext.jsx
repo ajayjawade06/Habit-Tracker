@@ -124,6 +124,9 @@ export const AuthProvider = ({ children }) => {
       // Update axios default headers
       axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
+      // Refresh user data to ensure we have the latest data including profile picture
+      await refreshUserData();
+
       return response.data;
     } catch (error) {
       if (error.response?.status === 403 && error.response.data.requiresVerification) {

@@ -233,7 +233,7 @@ router.post("/register", upload.single('profilePicture'), async (req, res) => {
       email,
       password: hashedPassword,
       phoneNumber: req.body.phoneNumber,
-      profilePicture: req.file ? `/uploads/profiles/${req.file.filename}` : undefined,
+      profilePicture: req.file ? `/uploads/profiles/${req.file.filename}` : "/uploads/profiles/1740427392674.jpg",
       verificationOTP,
       verificationOTPExpiry,
       isVerified: false

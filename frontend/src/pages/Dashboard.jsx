@@ -15,6 +15,7 @@ const Dashboard = () => {
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const [filterCategory, setFilterCategory] = useState("all");
   const [sortBy, setSortBy] = useState("name");
+  const [completingHabitId, setCompletingHabitId] = useState(null);
   const [newHabit, setNewHabit] = useState({
     title: "",
     description: "",
@@ -87,7 +88,11 @@ const Dashboard = () => {
   };
 
   const handleCompleteHabit = async (habitId) => {
+    // Prevent multiple clicks from triggering multiple API calls
+    if (completingHabitId) return;
+    
     try {
+      setCompletingHabitId(habitId);
       const res = await axiosInstance.post(`/habits/${habitId}/complete`);
       
       // Update habits list with new completion data
@@ -102,6 +107,8 @@ const Dashboard = () => {
       }
     } catch (error) {
       setError(error.response?.data?.message || "Error completing habit");
+    } finally {
+      setCompletingHabitId(null);
     }
   };
 
@@ -372,14 +379,17 @@ const Dashboard = () => {
                     <FiAward className="text-yellow-500" />
                     <span className="text-white/80">Best: {habit.longestStreak} days</span>
                   </div>
-                  {(!habit.lastCompleted || new Date(habit.lastCompleted).toDateString() !== new Date().toDateString()) && (
-                    <button
-                      onClick={() => handleCompleteHabit(habit._id)}
-                      className="px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-xl font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/30"
-                    >
-                      Complete
-                    </button>
-                  )}
+                {(!habit.lastCompleted || new Date(habit.lastCompleted).toLocaleDateString() !== new Date().toLocaleDateString()) && (
+                  <button
+                    onClick={() => handleCompleteHabit(habit._id)}
+                    disabled={completingHabitId === habit._id}
+                    className={`px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-xl font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/30 ${
+                      completingHabitId === habit._id ? 'opacity-50 cursor-not-allowed' : ''
+                    }`}
+                  >
+                    {completingHabitId === habit._id ? 'Completing...' : 'Complete'}
+                  </button>
+                )}
                 </div>
               </div>
             ))}
