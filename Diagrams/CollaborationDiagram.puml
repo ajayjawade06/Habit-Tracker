@@ -1,0 +1,47 @@
+@startuml Collaboration Diagram
+
+title Collaboration Diagram - Habit Tracker Application
+
+' Objects
+object User
+object AuthController
+object UserModel
+object HabitController
+object HabitModel
+object CompletionModel
+object BadgeModel
+object ReportController
+
+' Authentication Flow
+User -> AuthController : 1: login(email, password)
+AuthController -> UserModel : 2: findByEmail(email)
+UserModel -> AuthController : 3: user
+AuthController -> AuthController : 4: validatePassword(password)
+AuthController -> User : 5: authToken
+
+' Habit Creation Flow
+User -> HabitController : 6: createHabit(habitData)
+HabitController -> HabitModel : 7: create(habitData)
+HabitModel -> HabitController : 8: newHabit
+HabitController -> User : 9: habitDetails
+
+' Habit Completion Flow
+User -> HabitController : 10: completeHabit(habitId)
+HabitController -> CompletionModel : 11: create(habitId, userId, date)
+CompletionModel -> HabitController : 12: completion
+HabitController -> HabitModel : 13: updateStreak(habitId)
+HabitModel -> HabitController : 14: updatedHabit
+HabitController -> BadgeModel : 15: checkAndCreateBadges(habit)
+BadgeModel -> HabitController : 16: newBadges
+HabitController -> User : 17: completionStatus, newBadges
+
+' Report Generation Flow
+User -> ReportController : 18: generateReport(userId, type)
+ReportController -> HabitModel : 19: findByUserId(userId)
+HabitModel -> ReportController : 20: habits
+ReportController -> CompletionModel : 21: findByUserId(userId)
+CompletionModel -> ReportController : 22: completions
+ReportController -> ReportController : 23: processData(habits, completions, type)
+ReportController -> User : 24: reportData
+
+@enduml

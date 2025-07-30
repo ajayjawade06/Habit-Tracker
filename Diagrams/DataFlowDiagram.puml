@@ -1,0 +1,49 @@
+@startuml Data Flow Diagram
+
+title Data Flow Diagram - Habit Tracker Application
+
+' Level 0 DFD (Context Diagram)
+package "Level 0 DFD (Context Diagram)" {
+  actor User as user0
+  component "Habit Tracker System" as system0
+  
+  user0 -right-> system0 : User Registration/Login,\nHabit Management,\nHabit Tracking
+  system0 -left-> user0 : Authentication Response,\nHabit Data,\nReports & Analytics
+}
+
+' Level 1 DFD
+package "Level 1 DFD" {
+  actor User as user1
+  
+  component "Authentication System" as auth
+  component "Habit Management" as habitMgmt
+  component "Habit Tracking" as habitTrack
+  component "Reporting System" as reporting
+  
+  database "User Database" as userDB
+  database "Habit Database" as habitDB
+  database "Completion Database" as completionDB
+  
+  ' User to Authentication System
+  user1 -right-> auth : Registration/Login
+  auth -left-> user1 : Auth Response
+  auth <--> userDB
+  
+  ' User to Habit Management
+  user1 -right-> habitMgmt : Create, Update, Delete Habits
+  habitMgmt -left-> user1 : Habit Data
+  habitMgmt <--> habitDB
+  
+  ' User to Habit Tracking
+  user1 -right-> habitTrack : Mark Habits Complete
+  habitTrack -left-> user1 : Completion Status, Badges
+  habitTrack <--> completionDB
+  
+  ' User to Reporting System
+  user1 -right-> reporting : Request Reports
+  reporting -left-> user1 : Reports & Analytics
+  reporting --> habitDB
+  reporting --> completionDB
+}
+
+@enduml

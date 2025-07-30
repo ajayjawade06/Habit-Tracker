@@ -1,0 +1,242 @@
+<![CDATA[<mxfile host="app.diagrams.net" modified="2025-04-20T20:41:00.000Z" agent="Mozilla/5.0" etag="class-diagram" version="21.6.8" type="device">
+  <diagram id="class-diagram" name="Class Diagram">
+    <mxGraphModel dx="1422" dy="762" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        
+        <!-- Title -->
+        <mxCell id="title" value="Class Diagram - Habit Tracker Application" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="225" y="40" width="400" height="30" as="geometry" />
+        </mxCell>
+        
+        <!-- User Class -->
+        <mxCell id="user-class" value="User" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="120" y="120" width="240" height="240" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="user-attributes" value="+ id: ObjectId&#xa;+ name: String&#xa;+ email: String&#xa;+ password: String&#xa;+ profilePicture: String&#xa;+ phoneNumber: String&#xa;+ bio: String&#xa;+ address: String&#xa;+ isVerified: Boolean&#xa;+ verificationOTP: String&#xa;+ verificationOTPExpiry: Date&#xa;+ resetOTP: String&#xa;+ resetOTPExpiry: Date&#xa;+ createdAt: Date&#xa;+ updatedAt: Date" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="user-class">
+          <mxGeometry y="26" width="240" height="154" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="user-line" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="user-class">
+          <mxGeometry y="180" width="240" height="8" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="user-methods" value="+ register(): User&#xa;+ login(): AuthToken&#xa;+ updateProfile(): User&#xa;+ resetPassword(): Boolean&#xa;+ verifyEmail(): Boolean" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="user-class">
+          <mxGeometry y="188" width="240" height="52" as="geometry" />
+        </mxCell>
+        
+        <!-- Habit Class -->
+        <mxCell id="habit-class" value="Habit" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="480" y="120" width="240" height="280" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="habit-attributes" value="+ id: ObjectId&#xa;+ user: ObjectId&#xa;+ title: String&#xa;+ description: String&#xa;+ category: String&#xa;+ frequency: String&#xa;+ timeOfDay: String&#xa;+ currentStreak: Number&#xa;+ longestStreak: Number&#xa;+ totalCompletions: Number&#xa;+ completionHistory: Array&lt;Completion&gt;&#xa;+ badges: Array&lt;Badge&gt;&#xa;+ lastCompleted: Date&#xa;+ startDate: Date&#xa;+ active: Boolean&#xa;+ createdAt: Date&#xa;+ updatedAt: Date" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="habit-class">
+          <mxGeometry y="26" width="240" height="194" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="habit-line" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="habit-class">
+          <mxGeometry y="220" width="240" height="8" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="habit-methods" value="+ create(): Habit&#xa;+ update(): Habit&#xa;+ delete(): Boolean&#xa;+ complete(): Completion&#xa;+ calculateStreak(): Number&#xa;+ earnBadge(): Badge" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="habit-class">
+          <mxGeometry y="228" width="240" height="52" as="geometry" />
+        </mxCell>
+        
+        <!-- Completion Class -->
+        <mxCell id="completion-class" value="Completion" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="480" y="480" width="240" height="120" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="completion-attributes" value="+ id: ObjectId&#xa;+ habitId: ObjectId&#xa;+ userId: ObjectId&#xa;+ date: Date&#xa;+ completed: Boolean" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="completion-class">
+          <mxGeometry y="26" width="240" height="54" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="completion-line" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="completion-class">
+          <mxGeometry y="80" width="240" height="8" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="completion-methods" value="+ create(): Completion&#xa;+ delete(): Boolean" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="completion-class">
+          <mxGeometry y="88" width="240" height="32" as="geometry" />
+        </mxCell>
+        
+        <!-- Badge Class -->
+        <mxCell id="badge-class" value="Badge" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="480" y="680" width="240" height="120" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="badge-attributes" value="+ id: ObjectId&#xa;+ habitId: ObjectId&#xa;+ name: String&#xa;+ icon: String&#xa;+ description: String&#xa;+ dateEarned: Date" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="badge-class">
+          <mxGeometry y="26" width="240" height="64" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="badge-line" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="badge-class">
+          <mxGeometry y="90" width="240" height="8" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="badge-methods" value="+ create(): Badge" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="badge-class">
+          <mxGeometry y="98" width="240" height="22" as="geometry" />
+        </mxCell>
+        
+        <!-- Category Class -->
+        <mxCell id="category-class" value="Category" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="120" y="480" width="240" height="100" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="category-attributes" value="+ id: ObjectId&#xa;+ name: String&#xa;+ icon: String" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="category-class">
+          <mxGeometry y="26" width="240" height="44" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="category-line" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="category-class">
+          <mxGeometry y="70" width="240" height="8" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="category-methods" value="+ getAll(): Array&lt;Category&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="category-class">
+          <mxGeometry y="78" width="240" height="22" as="geometry" />
+        </mxCell>
+        
+        <!-- Report Class -->
+        <mxCell id="report-class" value="Report" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="120" y="680" width="240" height="120" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="report-attributes" value="+ userId: ObjectId" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="report-class">
+          <mxGeometry y="26" width="240" height="24" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="report-line" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="report-class">
+          <mxGeometry y="50" width="240" height="8" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="report-methods" value="+ generateWeeklyReport(): Object&#xa;+ generateMonthlyReport(): Object&#xa;+ generateCategoryReport(): Object&#xa;+ calculateCompletionRate(): Number" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="report-class">
+          <mxGeometry y="58" width="240" height="62" as="geometry" />
+        </mxCell>
+        
+        <!-- Relationships -->
+        <!-- User to Habit (one-to-many) -->
+        <mxCell id="user-to-habit" value="1" style="endArrow=open;html=1;endSize=12;startArrow=diamondThin;startSize=14;startFill=0;edgeStyle=orthogonalEdgeStyle;align=left;verticalAlign=bottom;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="user-attributes" target="habit-attributes">
+          <mxGeometry x="-1" y="3" relative="1" as="geometry">
+            <mxPoint x="400" y="400" as="sourcePoint" />
+            <mxPoint x="560" y="400" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="user-to-habit-label" value="*" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="user-to-habit">
+          <mxGeometry x="0.9" y="1" relative="1" as="geometry">
+            <mxPoint x="-10" y="-12" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="user-to-habit-text" value="owns" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="user-to-habit">
+          <mxGeometry x="0.0667" y="1" relative="1" as="geometry">
+            <mxPoint y="-9" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- Habit to Category (many-to-one) -->
+        <mxCell id="habit-to-category" value="*" style="endArrow=open;html=1;endSize=12;startArrow=diamondThin;startSize=14;startFill=0;edgeStyle=orthogonalEdgeStyle;align=left;verticalAlign=bottom;rounded=0;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0.75;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="habit-class" target="category-class">
+          <mxGeometry x="-1" y="3" relative="1" as="geometry">
+            <mxPoint x="400" y="400" as="sourcePoint" />
+            <mxPoint x="560" y="400" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="540" y="440" />
+              <mxPoint x="300" y="440" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="habit-to-category-label" value="1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="habit-to-category">
+          <mxGeometry x="0.9" y="1" relative="1" as="geometry">
+            <mxPoint x="-10" y="-12" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="habit-to-category-text" value="belongs to" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="habit-to-category">
+          <mxGeometry x="0.0667" y="1" relative="1" as="geometry">
+            <mxPoint y="-9" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- Habit to Completion (one-to-many) -->
+        <mxCell id="habit-to-completion" value="1" style="endArrow=open;html=1;endSize=12;startArrow=diamondThin;startSize=14;startFill=1;edgeStyle=orthogonalEdgeStyle;align=left;verticalAlign=bottom;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="habit-class" target="completion-class">
+          <mxGeometry x="-1" y="3" relative="1" as="geometry">
+            <mxPoint x="400" y="400" as="sourcePoint" />
+            <mxPoint x="560" y="400" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="habit-to-completion-label" value="*" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="habit-to-completion">
+          <mxGeometry x="0.9" y="1" relative="1" as="geometry">
+            <mxPoint x="-10" y="-12" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="habit-to-completion-text" value="has" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="habit-to-completion">
+          <mxGeometry x="0.0667" y="1" relative="1" as="geometry">
+            <mxPoint y="-9" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- Habit to Badge (one-to-many) -->
+        <mxCell id="habit-to-badge" value="1" style="endArrow=open;html=1;endSize=12;startArrow=diamondThin;startSize=14;startFill=1;edgeStyle=orthogonalEdgeStyle;align=left;verticalAlign=bottom;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="completion-class" target="badge-class">
+          <mxGeometry x="-1" y="3" relative="1" as="geometry">
+            <mxPoint x="400" y="400" as="sourcePoint" />
+            <mxPoint x="560" y="400" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="habit-to-badge-label" value="*" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="habit-to-badge">
+          <mxGeometry x="0.9" y="1" relative="1" as="geometry">
+            <mxPoint x="-10" y="-12" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="habit-to-badge-text" value="earns" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="habit-to-badge">
+          <mxGeometry x="0.0667" y="1" relative="1" as="geometry">
+            <mxPoint y="-9" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- User to Report (one-to-many) -->
+        <mxCell id="user-to-report" value="1" style="endArrow=open;html=1;endSize=12;startArrow=diamondThin;startSize=14;startFill=0;edgeStyle=orthogonalEdgeStyle;align=left;verticalAlign=bottom;rounded=0;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0.25;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="user-class" target="report-class">
+          <mxGeometry x="-1" y="3" relative="1" as="geometry">
+            <mxPoint x="400" y="400" as="sourcePoint" />
+            <mxPoint x="560" y="400" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="180" y="400" />
+              <mxPoint x="180" y="680" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="user-to-report-label" value="*" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="user-to-report">
+          <mxGeometry x="0.9" y="1" relative="1" as="geometry">
+            <mxPoint x="-10" y="-12" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="user-to-report-text" value="generates" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="user-to-report">
+          <mxGeometry x="0.0667" y="1" relative="1" as="geometry">
+            <mxPoint y="-9" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- Report to Habit (many-to-many) -->
+        <mxCell id="report-to-habit" value="" style="endArrow=open;html=1;endSize=12;startArrow=open;startSize=14;startFill=0;edgeStyle=orthogonalEdgeStyle;align=left;verticalAlign=bottom;rounded=0;exitX=0.75;exitY=0;exitDx=0;exitDy=0;entryX=0.75;entryY=1;entryDx=0;entryDy=0;dashed=1;" edge="1" parent="1" source="report-class" target="category-class">
+          <mxGeometry x="-1" y="3" relative="1" as="geometry">
+            <mxPoint x="400" y="400" as="sourcePoint" />
+            <mxPoint x="560" y="400" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="report-to-habit-text" value="analyzes" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="report-to-habit">
+          <mxGeometry x="0.0667" y="1" relative="1" as="geometry">
+            <mxPoint y="-9" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- Report to Completion (many-to-many) -->
+        <mxCell id="report-to-completion" value="" style="endArrow=open;html=1;endSize=12;startArrow=open;startSize=14;startFill=0;edgeStyle=orthogonalEdgeStyle;align=left;verticalAlign=bottom;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;dashed=1;" edge="1" parent="1" source="report-attributes" target="badge-attributes">
+          <mxGeometry x="-1" y="3" relative="1" as="geometry">
+            <mxPoint x="400" y="400" as="sourcePoint" />
+            <mxPoint x="560" y="400" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="report-to-completion-text" value="analyzes" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="report-to-completion">
+          <mxGeometry x="0.0667" y="1" relative="1" as="geometry">
+            <mxPoint y="-9" as="offset" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>]]>

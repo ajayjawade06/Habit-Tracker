@@ -12,6 +12,7 @@ import Dashboard from './pages/Dashboard';
 import Progress from './pages/Progress';
 import Profile from './pages/Profile';
 import UserInfo from './pages/UserInfo';
+import Reports from './pages/Reports';
 import Home from './pages/Home';
 
 const ProtectedRoute = ({ children }) => {
@@ -102,6 +103,16 @@ const AppContent = () => {
                 <ProtectedRoute>
                   <PageTransition>
                     <UserInfo />
+                  </PageTransition>
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/reports"
+              element={
+                <ProtectedRoute>
+                  <PageTransition>
+                    <Reports />
                   </PageTransition>
                 </ProtectedRoute>
               }

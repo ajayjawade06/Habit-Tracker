@@ -1,0 +1,62 @@
+@startuml Component Diagram
+
+title Component Diagram - Habit Tracker Application
+
+' Frontend Package
+package "Frontend" {
+  [Authentication Components] as authComp
+  [Habit Management Components] as habitComp
+  [Tracking Components] as trackComp
+  [Reporting Components] as reportComp
+  [UI Components] as uiComp
+  [State Management] as stateMgmt
+  [API Service] as apiService
+  
+  ' Frontend Internal Dependencies
+  authComp --> uiComp
+  habitComp --> uiComp
+  trackComp --> uiComp
+  reportComp --> uiComp
+  uiComp --> stateMgmt
+  stateMgmt --> apiService
+}
+
+' Backend Package
+package "Backend" {
+  [Authentication Controllers] as authCtrl
+  [Habit Controllers] as habitCtrl
+  [Tracking Controllers] as trackCtrl
+  [Reporting Controllers] as reportCtrl
+  [Middleware] as middleware
+  [Database Models] as dbModels
+  [Utility Services] as utilServices
+  
+  ' Backend Internal Dependencies
+  authCtrl --> middleware
+  habitCtrl --> dbModels
+  trackCtrl --> utilServices
+  reportCtrl --> dbModels
+  reportCtrl --> utilServices
+}
+
+' Database Package
+package "Database" {
+  database "Users Collection" as usersDB
+  database "Habits Collection" as habitsDB
+  database "Completions Collection" as completionsDB
+  database "Badges Collection" as badgesDB
+}
+
+' Frontend to Backend Dependencies
+apiService --> authCtrl
+apiService --> habitCtrl
+apiService --> trackCtrl
+apiService --> reportCtrl
+
+' Backend to Database Dependencies
+dbModels --> usersDB
+dbModels --> habitsDB
+dbModels --> completionsDB
+dbModels --> badgesDB
+
+@enduml

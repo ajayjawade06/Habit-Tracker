@@ -1,0 +1,99 @@
+@startuml Class Diagram
+
+title Class Diagram - Habit Tracker Application
+
+' Classes
+class User {
+  +id: ObjectId
+  +name: String
+  +email: String
+  +password: String
+  +profilePicture: String
+  +phoneNumber: String
+  +bio: String
+  +address: String
+  +isVerified: Boolean
+  +verificationOTP: String
+  +verificationOTPExpiry: Date
+  +resetOTP: String
+  +resetOTPExpiry: Date
+  +createdAt: Date
+  +updatedAt: Date
+  +register(): User
+  +login(): AuthToken
+  +updateProfile(): User
+  +resetPassword(): Boolean
+  +verifyEmail(): Boolean
+}
+
+class Habit {
+  +id: ObjectId
+  +user: ObjectId
+  +title: String
+  +description: String
+  +category: String
+  +frequency: String
+  +timeOfDay: String
+  +currentStreak: Number
+  +longestStreak: Number
+  +totalCompletions: Number
+  +completionHistory: Array<Completion>
+  +badges: Array<Badge>
+  +lastCompleted: Date
+  +startDate: Date
+  +active: Boolean
+  +createdAt: Date
+  +updatedAt: Date
+  +create(): Habit
+  +update(): Habit
+  +delete(): Boolean
+  +complete(): Completion
+  +calculateStreak(): Number
+  +earnBadge(): Badge
+}
+
+class Completion {
+  +id: ObjectId
+  +habitId: ObjectId
+  +userId: ObjectId
+  +date: Date
+  +completed: Boolean
+  +create(): Completion
+  +delete(): Boolean
+}
+
+class Badge {
+  +id: ObjectId
+  +habitId: ObjectId
+  +name: String
+  +icon: String
+  +description: String
+  +dateEarned: Date
+  +create(): Badge
+}
+
+class Category {
+  +id: ObjectId
+  +name: String
+  +icon: String
+  +getAll(): Array<Category>
+}
+
+class Report {
+  +userId: ObjectId
+  +generateWeeklyReport(): Object
+  +generateMonthlyReport(): Object
+  +generateCategoryReport(): Object
+  +calculateCompletionRate(): Number
+}
+
+' Relationships
+User "1" -- "many" Habit : owns >
+Habit "many" -- "1" Category : belongs to >
+Habit "1" -- "many" Completion : has >
+Habit "1" -- "many" Badge : earns >
+User "1" -- "many" Report : generates >
+Report ..> Habit : analyzes >
+Report ..> Completion : analyzes >
+
+@enduml

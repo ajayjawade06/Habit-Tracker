@@ -1,0 +1,191 @@
+<![CDATA[<mxfile host="app.diagrams.net" modified="2025-04-20T20:38:00.000Z" agent="Mozilla/5.0" etag="data-flow-diagram" version="21.6.8" type="device">
+  <diagram id="data-flow-diagram" name="Data Flow Diagram">
+    <mxGraphModel dx="1422" dy="762" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        
+        <!-- Level 0 DFD (Context Diagram) -->
+        <mxCell id="level0-title" value="Level 0 DFD (Context Diagram)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="275" y="40" width="300" height="30" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="user" value="User" style="html=1;dashed=0;whiteSpace=wrap;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="120" y="120" width="100" height="50" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="system" value="Habit Tracker System" style="ellipse;whiteSpace=wrap;html=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="360" y="105" width="160" height="80" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="user-to-system" value="User Registration/Login,&lt;br&gt;Habit Management,&lt;br&gt;Habit Tracking" style="endArrow=classic;html=1;rounded=0;fontSize=12;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="user" target="system">
+          <mxGeometry x="-0.0667" y="20" width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="400" y="420" as="sourcePoint" />
+            <mxPoint x="450" y="370" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        
+        <mxCell id="system-to-user" value="Authentication Response,&lt;br&gt;Habit Data,&lt;br&gt;Reports &amp; Analytics" style="endArrow=classic;html=1;rounded=0;fontSize=12;entryX=1;entryY=0.75;entryDx=0;entryDy=0;exitX=0;exitY=0.75;exitDx=0;exitDy=0;" edge="1" parent="1" source="system" target="user">
+          <mxGeometry x="-0.0667" y="-20" width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="400" y="420" as="sourcePoint" />
+            <mxPoint x="450" y="370" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- Level 1 DFD -->
+        <mxCell id="level1-title" value="Level 1 DFD" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="275" y="240" width="300" height="30" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="user-level1" value="User" style="html=1;dashed=0;whiteSpace=wrap;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="120" y="400" width="100" height="50" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="auth-system" value="Authentication System" style="ellipse;whiteSpace=wrap;html=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="360" y="300" width="160" height="80" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="habit-management" value="Habit Management" style="ellipse;whiteSpace=wrap;html=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="360" y="400" width="160" height="80" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="habit-tracking" value="Habit Tracking" style="ellipse;whiteSpace=wrap;html=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="360" y="500" width="160" height="80" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="reporting-system" value="Reporting System" style="ellipse;whiteSpace=wrap;html=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="360" y="600" width="160" height="80" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="user-db" value="User Database" style="html=1;dashed=0;whiteSpace=wrap;shape=partialRectangle;right=0;left=0;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="640" y="320" width="120" height="40" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="habit-db" value="Habit Database" style="html=1;dashed=0;whiteSpace=wrap;shape=partialRectangle;right=0;left=0;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="640" y="420" width="120" height="40" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="completion-db" value="Completion Database" style="html=1;dashed=0;whiteSpace=wrap;shape=partialRectangle;right=0;left=0;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="640" y="520" width="120" height="40" as="geometry" />
+        </mxCell>
+        
+        <!-- Connections -->
+        <mxCell id="user-to-auth" value="Registration/Login" style="endArrow=classic;html=1;rounded=0;fontSize=12;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=1;exitY=0.25;exitDx=0;exitDy=0;" edge="1" parent="1" source="user-level1" target="auth-system">
+          <mxGeometry x="-0.2941" y="13" width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="400" y="420" as="sourcePoint" />
+            <mxPoint x="450" y="370" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        
+        <mxCell id="auth-to-user" value="Auth Response" style="endArrow=classic;html=1;rounded=0;fontSize=12;entryX=1;entryY=0.25;entryDx=0;entryDy=0;exitX=0;exitY=0.75;exitDx=0;exitDy=0;" edge="1" parent="1" source="auth-system" target="user-level1">
+          <mxGeometry x="-0.1765" y="-13" width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="400" y="420" as="sourcePoint" />
+            <mxPoint x="450" y="370" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        
+        <mxCell id="auth-to-db" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;fontSize=12;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="auth-system" target="user-db">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="400" y="420" as="sourcePoint" />
+            <mxPoint x="450" y="370" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        
+        <mxCell id="user-to-habit-mgmt" value="Create, Update, Delete Habits" style="endArrow=classic;html=1;rounded=0;fontSize=12;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="user-level1" target="habit-management">
+          <mxGeometry x="-0.0667" y="20" width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="400" y="420" as="sourcePoint" />
+            <mxPoint x="450" y="370" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        
+        <mxCell id="habit-mgmt-to-user" value="Habit Data" style="endArrow=classic;html=1;rounded=0;fontSize=12;entryX=1;entryY=0.5;entryDx=0;entryDy=0;exitX=0;exitY=0.75;exitDx=0;exitDy=0;" edge="1" parent="1" source="habit-management" target="user-level1">
+          <mxGeometry x="-0.1765" y="-13" width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="400" y="420" as="sourcePoint" />
+            <mxPoint x="450" y="370" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        
+        <mxCell id="habit-mgmt-to-db" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;fontSize=12;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="habit-management" target="habit-db">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="400" y="420" as="sourcePoint" />
+            <mxPoint x="450" y="370" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        
+        <mxCell id="user-to-habit-tracking" value="Mark Habits Complete" style="endArrow=classic;html=1;rounded=0;fontSize=12;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=1;exitY=0.75;exitDx=0;exitDy=0;" edge="1" parent="1" source="user-level1" target="habit-tracking">
+          <mxGeometry x="-0.2941" y="13" width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="400" y="420" as="sourcePoint" />
+            <mxPoint x="450" y="370" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        
+        <mxCell id="habit-tracking-to-user" value="Completion Status, Badges" style="endArrow=classic;html=1;rounded=0;fontSize=12;entryX=0.75;entryY=1;entryDx=0;entryDy=0;exitX=0;exitY=0.75;exitDx=0;exitDy=0;" edge="1" parent="1" source="habit-tracking" target="user-level1">
+          <mxGeometry x="-0.1765" y="-13" width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="400" y="420" as="sourcePoint" />
+            <mxPoint x="450" y="370" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="195" y="560" />
+            </Array>
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        
+        <mxCell id="habit-tracking-to-db" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;fontSize=12;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="habit-tracking" target="completion-db">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="400" y="420" as="sourcePoint" />
+            <mxPoint x="450" y="370" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        
+        <mxCell id="user-to-reporting" value="Request Reports" style="endArrow=classic;html=1;rounded=0;fontSize=12;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="user-level1" target="reporting-system">
+          <mxGeometry x="-0.2941" y="13" width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="400" y="420" as="sourcePoint" />
+            <mxPoint x="450" y="370" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="170" y="640" />
+            </Array>
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        
+        <mxCell id="reporting-to-user" value="Reports &amp; Analytics" style="endArrow=classic;html=1;rounded=0;fontSize=12;entryX=0.25;entryY=1;entryDx=0;entryDy=0;exitX=0;exitY=0.25;exitDx=0;exitDy=0;" edge="1" parent="1" source="reporting-system" target="user-level1">
+          <mxGeometry x="-0.4118" y="-20" width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="400" y="420" as="sourcePoint" />
+            <mxPoint x="450" y="370" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="145" y="620" />
+            </Array>
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        
+        <mxCell id="reporting-to-habit-db" value="" style="endArrow=classic;html=1;rounded=0;fontSize=12;entryX=0.5;entryY=1;entryDx=0;entryDy=0;exitX=1;exitY=0.25;exitDx=0;exitDy=0;" edge="1" parent="1" source="reporting-system" target="habit-db">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="400" y="420" as="sourcePoint" />
+            <mxPoint x="450" y="370" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="700" y="620" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        
+        <mxCell id="reporting-to-completion-db" value="" style="endArrow=classic;html=1;rounded=0;fontSize=12;entryX=0.5;entryY=1;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="reporting-system" target="completion-db">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="400" y="420" as="sourcePoint" />
+            <mxPoint x="450" y="370" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="700" y="640" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>]]>

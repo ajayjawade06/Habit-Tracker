@@ -1,40 +1,48 @@
-import { createContext, useContext, useState, useCallback } from 'react';
+import { createContext, useContext, useCallback } from 'react';
 import PropTypes from 'prop-types';
-import Notification from '../components/Notification';
+import toast, { Toaster } from 'react-hot-toast';
 
 const NotificationContext = createContext(null);
 
 export const NotificationProvider = ({ children }) => {
-  const [notifications, setNotifications] = useState([]);
-
   const showNotification = useCallback((message, type = 'info', duration = 3000) => {
-    const id = Date.now();
-    setNotifications(prev => [...prev, { id, message, type, duration }]);
-    
-    // Automatically remove notification after duration
-    setTimeout(() => {
-      setNotifications(prev => prev.filter(notification => notification.id !== id));
-    }, duration + 300); // Add 300ms for exit animation
-  }, []);
+    const toastOptions = {
+      duration: duration,
+      position: 'top-right',
+      style: {
+        background: type === 'error' ? '#ef4444' : 
+                   type === 'success' ? '#10b981' : 
+                   type === 'warning' ? '#f59e0b' : 
+                   '#3b82f6',
+        color: '#fff',
+        padding: '16px',
+        borderRadius: '8px',
+      },
+    };
 
-  const removeNotification = useCallback((id) => {
-    setNotifications(prev => prev.filter(notification => notification.id !== id));
+    switch (type) {
+      case 'success':
+        toast.success(message, toastOptions);
+        break;
+      case 'error':
+        toast.error(message, toastOptions);
+        break;
+      case 'warning':
+        toast(message, {
+          ...toastOptions,
+          icon: '⚠️',
+        });
+        break;
+      default:
+        toast(message, toastOptions);
+        break;
+    }
   }, []);
 
   return (
     <NotificationContext.Provider value={{ showNotification }}>
       {children}
-      <div className="fixed top-0 right-0 z-50 p-4 space-y-4">
-        {notifications.map(({ id, message, type, duration }) => (
-          <Notification
-            key={id}
-            message={message}
-            type={type}
-            duration={duration}
-            onClose={() => removeNotification(id)}
-          />
-        ))}
-      </div>
+      <Toaster />
     </NotificationContext.Provider>
   );
 };

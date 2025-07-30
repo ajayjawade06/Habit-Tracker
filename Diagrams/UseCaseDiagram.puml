@@ -1,0 +1,41 @@
+@startuml Use Case Diagram
+
+title Use Case Diagram - Habit Tracker Application
+
+' Actor
+actor User
+
+' Use Cases
+rectangle "Habit Tracker System" {
+  usecase "Register" as UC1
+  usecase "Login" as UC2
+  usecase "Manage Profile" as UC3
+  usecase "Create Habit" as UC4
+  usecase "Update Habit" as UC5
+  usecase "Delete Habit" as UC6
+  usecase "Mark Habit Complete" as UC7
+  usecase "View Progress" as UC8
+  usecase "Generate Reports" as UC9
+  usecase "View Badges" as UC10
+  usecase "Filter Habits" as UC11
+  usecase "Sort Habits" as UC12
+}
+
+' Relationships between actor and use cases
+User --> UC1
+User --> UC2
+User --> UC3
+User --> UC4
+User --> UC5
+User --> UC6
+User --> UC7
+User --> UC8
+User --> UC9
+
+' Relationships between use cases
+UC7 ..> UC10 : <<include>>
+UC8 <.. UC11 : <<extend>>
+UC8 <.. UC12 : <<extend>>
+UC9 ..> UC8 : <<include>>
+
+@enduml

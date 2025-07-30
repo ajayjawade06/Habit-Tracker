@@ -1,0 +1,72 @@
+@startuml Object Diagram
+
+title Object Diagram - Habit Tracker Application
+
+' User Object
+object "user:User" as user {
+  id = "u123"
+  name = "John Doe"
+  email = "john@example.com"
+  profilePicture = "/uploads/profiles/john.jpg"
+  isVerified = true
+}
+
+' Habit Objects
+object "morningExercise:Habit" as habit1 {
+  id = "h456"
+  userId = "u123"
+  title = "Morning Exercise"
+  description = "30 minutes workout"
+  category = "Health"
+  frequency = "Daily"
+  timeOfDay = "Morning"
+  currentStreak = 5
+  longestStreak = 10
+}
+
+object "readBook:Habit" as habit2 {
+  id = "h789"
+  userId = "u123"
+  title = "Read a Book"
+  description = "Read for 20 minutes"
+  category = "Learning"
+  frequency = "Daily"
+  timeOfDay = "Evening"
+  currentStreak = 3
+  longestStreak = 7
+}
+
+' Completion Objects
+object "completion1:Completion" as completion1 {
+  id = "c111"
+  habitId = "h456"
+  userId = "u123"
+  date = "2025-04-19"
+}
+
+object "completion2:Completion" as completion2 {
+  id = "c222"
+  habitId = "h789"
+  userId = "u123"
+  date = "2025-04-19"
+}
+
+' Badge Object
+object "streakBadge:Badge" as badge {
+  id = "b333"
+  habitId = "h456"
+  name = "5-Day Streak"
+  icon = "🔥"
+  description = "Completed habit for 5 consecutive days"
+  dateEarned = "2025-04-19"
+}
+
+' Relationships
+user -- habit1 : owns
+user -- habit2 : owns
+habit1 -- completion1 : has
+habit2 -- completion2 : has
+completion1 -- badge : earns
+user .. completion1 : records
+
+@enduml

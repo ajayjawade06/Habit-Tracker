@@ -1,0 +1,61 @@
+@startuml Deployment Diagram
+
+title Deployment Diagram - Habit Tracker Application
+
+' Nodes
+node "Client Device" as client {
+  component "Web Browser" as browser
+  component "React Application" as react
+}
+
+node "Web Server" as webServer {
+  component "Node.js" as nodejs
+  component "Express.js" as express
+  component "API Endpoints" as api
+}
+
+node "Database Server" as dbServer {
+  database "MongoDB" as mongodb
+}
+
+node "File Storage" as fileStorage {
+  folder "User Uploads" as uploads
+}
+
+' Connections
+client -- webServer : HTTPS
+webServer -- dbServer : Mongoose ODM
+dbServer -- fileStorage : File I/O
+
+' Deployment Notes
+note right of client
+  Client Device Requirements:
+  - Any device with modern web browser
+  - Internet connection
+  - Supports HTML5, CSS3, JavaScript
+end note
+
+note right of webServer
+  Web Server Requirements:
+  - Node.js runtime environment
+  - Express.js framework
+  - RESTful API architecture
+  - JWT authentication
+  - CORS enabled
+end note
+
+note right of dbServer
+  Database Server Requirements:
+  - MongoDB database
+  - Mongoose ODM
+  - Data persistence
+end note
+
+note right of fileStorage
+  File Storage Requirements:
+  - Disk storage for user uploads
+  - Profile pictures
+  - Minimum 1GB storage
+end note
+
+@enduml

@@ -1,6 +1,6 @@
 import { useEffect, useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
-import { FiPlus, FiAward, FiTrendingUp, FiCalendar, FiLogIn, FiEdit2, FiTrash2, FiUser } from "react-icons/fi";
+import { FiPlus, FiAward, FiTrendingUp, FiCalendar, FiLogIn, FiEdit2, FiTrash2, FiUser, FiBarChart2 } from "react-icons/fi";
 import { axiosInstance } from "../config";
 import { useAuth } from "../utils/AuthContext";
 
@@ -159,6 +159,14 @@ const Dashboard = () => {
                   <FiTrendingUp className="mr-1 sm:mr-2" />
                   <span className="hidden sm:inline">View Progress</span>
                   <span className="sm:hidden">Progress</span>
+                </button>
+                <button
+                  onClick={() => navigate("/reports")}
+                  className="px-3 sm:px-4 md:px-6 py-2 md:py-3 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-xl font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/30 flex items-center text-sm md:text-base"
+                >
+                  <FiBarChart2 className="mr-1 sm:mr-2" />
+                  <span className="hidden sm:inline">View Reports</span>
+                  <span className="sm:hidden">Reports</span>
                 </button>
                 <button
                   onClick={() => navigate("/user-info")}
@@ -478,6 +486,7 @@ const Dashboard = () => {
             </div>
           </div>
         )}
+
       </div>
     </div>
   );

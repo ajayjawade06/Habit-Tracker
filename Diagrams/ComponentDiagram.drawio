@@ -1,0 +1,360 @@
+<![CDATA[<mxfile host="app.diagrams.net" modified="2025-04-20T20:53:00.000Z" agent="Mozilla/5.0" etag="component-diagram" version="21.6.8" type="device">
+  <diagram id="component-diagram" name="Component Diagram">
+    <mxGraphModel dx="1422" dy="762" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        
+        <!-- Title -->
+        <mxCell id="title" value="Component Diagram - Habit Tracker Application" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="225" y="40" width="400" height="30" as="geometry" />
+        </mxCell>
+        
+        <!-- Frontend Package -->
+        <mxCell id="frontend-package" value="Frontend" style="shape=folder;fontStyle=1;spacingTop=10;tabWidth=40;tabHeight=14;tabPosition=left;html=1;whiteSpace=wrap;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="40" y="100" width="360" height="380" as="geometry" />
+        </mxCell>
+        
+        <!-- Frontend Components -->
+        <mxCell id="auth-components" value="Authentication Components" style="html=1;dropTarget=0;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="70" y="150" width="140" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="auth-components-symbol" value="" style="shape=module;jettyWidth=8;jettyHeight=4;" vertex="1" parent="auth-components">
+          <mxGeometry x="1" width="20" height="20" relative="1" as="geometry">
+            <mxPoint x="-27" y="7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        
+        <mxCell id="habit-management-components" value="Habit Management Components" style="html=1;dropTarget=0;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="70" y="230" width="140" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="habit-management-components-symbol" value="" style="shape=module;jettyWidth=8;jettyHeight=4;" vertex="1" parent="habit-management-components">
+          <mxGeometry x="1" width="20" height="20" relative="1" as="geometry">
+            <mxPoint x="-27" y="7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        
+        <mxCell id="tracking-components" value="Tracking Components" style="html=1;dropTarget=0;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="70" y="310" width="140" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="tracking-components-symbol" value="" style="shape=module;jettyWidth=8;jettyHeight=4;" vertex="1" parent="tracking-components">
+          <mxGeometry x="1" width="20" height="20" relative="1" as="geometry">
+            <mxPoint x="-27" y="7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        
+        <mxCell id="reporting-components" value="Reporting Components" style="html=1;dropTarget=0;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="70" y="390" width="140" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="reporting-components-symbol" value="" style="shape=module;jettyWidth=8;jettyHeight=4;" vertex="1" parent="reporting-components">
+          <mxGeometry x="1" width="20" height="20" relative="1" as="geometry">
+            <mxPoint x="-27" y="7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        
+        <mxCell id="ui-components" value="UI Components" style="html=1;dropTarget=0;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="230" y="150" width="140" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="ui-components-symbol" value="" style="shape=module;jettyWidth=8;jettyHeight=4;" vertex="1" parent="ui-components">
+          <mxGeometry x="1" width="20" height="20" relative="1" as="geometry">
+            <mxPoint x="-27" y="7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        
+        <mxCell id="state-management" value="State Management" style="html=1;dropTarget=0;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="230" y="230" width="140" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="state-management-symbol" value="" style="shape=module;jettyWidth=8;jettyHeight=4;" vertex="1" parent="state-management">
+          <mxGeometry x="1" width="20" height="20" relative="1" as="geometry">
+            <mxPoint x="-27" y="7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        
+        <mxCell id="api-service" value="API Service" style="html=1;dropTarget=0;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="230" y="310" width="140" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="api-service-symbol" value="" style="shape=module;jettyWidth=8;jettyHeight=4;" vertex="1" parent="api-service">
+          <mxGeometry x="1" width="20" height="20" relative="1" as="geometry">
+            <mxPoint x="-27" y="7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- Backend Package -->
+        <mxCell id="backend-package" value="Backend" style="shape=folder;fontStyle=1;spacingTop=10;tabWidth=40;tabHeight=14;tabPosition=left;html=1;whiteSpace=wrap;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="450" y="100" width="360" height="380" as="geometry" />
+        </mxCell>
+        
+        <!-- Backend Components -->
+        <mxCell id="auth-controllers" value="Authentication Controllers" style="html=1;dropTarget=0;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="480" y="150" width="140" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="auth-controllers-symbol" value="" style="shape=module;jettyWidth=8;jettyHeight=4;" vertex="1" parent="auth-controllers">
+          <mxGeometry x="1" width="20" height="20" relative="1" as="geometry">
+            <mxPoint x="-27" y="7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        
+        <mxCell id="habit-controllers" value="Habit Controllers" style="html=1;dropTarget=0;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="480" y="230" width="140" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="habit-controllers-symbol" value="" style="shape=module;jettyWidth=8;jettyHeight=4;" vertex="1" parent="habit-controllers">
+          <mxGeometry x="1" width="20" height="20" relative="1" as="geometry">
+            <mxPoint x="-27" y="7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        
+        <mxCell id="tracking-controllers" value="Tracking Controllers" style="html=1;dropTarget=0;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="480" y="310" width="140" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="tracking-controllers-symbol" value="" style="shape=module;jettyWidth=8;jettyHeight=4;" vertex="1" parent="tracking-controllers">
+          <mxGeometry x="1" width="20" height="20" relative="1" as="geometry">
+            <mxPoint x="-27" y="7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        
+        <mxCell id="reporting-controllers" value="Reporting Controllers" style="html=1;dropTarget=0;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="480" y="390" width="140" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="reporting-controllers-symbol" value="" style="shape=module;jettyWidth=8;jettyHeight=4;" vertex="1" parent="reporting-controllers">
+          <mxGeometry x="1" width="20" height="20" relative="1" as="geometry">
+            <mxPoint x="-27" y="7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        
+        <mxCell id="middleware" value="Middleware" style="html=1;dropTarget=0;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="640" y="150" width="140" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="middleware-symbol" value="" style="shape=module;jettyWidth=8;jettyHeight=4;" vertex="1" parent="middleware">
+          <mxGeometry x="1" width="20" height="20" relative="1" as="geometry">
+            <mxPoint x="-27" y="7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        
+        <mxCell id="database-models" value="Database Models" style="html=1;dropTarget=0;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="640" y="230" width="140" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="database-models-symbol" value="" style="shape=module;jettyWidth=8;jettyHeight=4;" vertex="1" parent="database-models">
+          <mxGeometry x="1" width="20" height="20" relative="1" as="geometry">
+            <mxPoint x="-27" y="7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        
+        <mxCell id="utility-services" value="Utility Services" style="html=1;dropTarget=0;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="640" y="310" width="140" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="utility-services-symbol" value="" style="shape=module;jettyWidth=8;jettyHeight=4;" vertex="1" parent="utility-services">
+          <mxGeometry x="1" width="20" height="20" relative="1" as="geometry">
+            <mxPoint x="-27" y="7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- Database Package -->
+        <mxCell id="database-package" value="Database" style="shape=folder;fontStyle=1;spacingTop=10;tabWidth=40;tabHeight=14;tabPosition=left;html=1;whiteSpace=wrap;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="245" y="520" width="360" height="200" as="geometry" />
+        </mxCell>
+        
+        <!-- Database Collections -->
+        <mxCell id="users-collection" value="Users Collection" style="html=1;dropTarget=0;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="275" y="570" width="140" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="users-collection-symbol" value="" style="shape=module;jettyWidth=8;jettyHeight=4;" vertex="1" parent="users-collection">
+          <mxGeometry x="1" width="20" height="20" relative="1" as="geometry">
+            <mxPoint x="-27" y="7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        
+        <mxCell id="habits-collection" value="Habits Collection" style="html=1;dropTarget=0;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="435" y="570" width="140" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="habits-collection-symbol" value="" style="shape=module;jettyWidth=8;jettyHeight=4;" vertex="1" parent="habits-collection">
+          <mxGeometry x="1" width="20" height="20" relative="1" as="geometry">
+            <mxPoint x="-27" y="7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        
+        <mxCell id="completions-collection" value="Completions Collection" style="html=1;dropTarget=0;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="275" y="640" width="140" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="completions-collection-symbol" value="" style="shape=module;jettyWidth=8;jettyHeight=4;" vertex="1" parent="completions-collection">
+          <mxGeometry x="1" width="20" height="20" relative="1" as="geometry">
+            <mxPoint x="-27" y="7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        
+        <mxCell id="badges-collection" value="Badges Collection" style="html=1;dropTarget=0;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="435" y="640" width="140" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="badges-collection-symbol" value="" style="shape=module;jettyWidth=8;jettyHeight=4;" vertex="1" parent="badges-collection">
+          <mxGeometry x="1" width="20" height="20" relative="1" as="geometry">
+            <mxPoint x="-27" y="7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- Dependencies -->
+        <!-- Frontend Internal Dependencies -->
+        <mxCell id="auth-to-ui" value="" style="endArrow=open;endSize=12;dashed=1;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="auth-components" target="ui-components">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="340" y="390" as="sourcePoint" />
+            <mxPoint x="500" y="390" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        
+        <mxCell id="habit-to-ui" value="" style="endArrow=open;endSize=12;dashed=1;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.75;entryDx=0;entryDy=0;" edge="1" parent="1" source="habit-management-components" target="ui-components">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="340" y="390" as="sourcePoint" />
+            <mxPoint x="500" y="390" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="220" y="260" />
+              <mxPoint x="220" y="195" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        
+        <mxCell id="tracking-to-ui" value="" style="endArrow=open;endSize=12;dashed=1;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.25;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="tracking-components" target="ui-components">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="340" y="390" as="sourcePoint" />
+            <mxPoint x="500" y="390" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="220" y="340" />
+              <mxPoint x="220" y="230" />
+              <mxPoint x="265" y="230" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        
+        <mxCell id="reporting-to-ui" value="" style="endArrow=open;endSize=12;dashed=1;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.75;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="reporting-components" target="ui-components">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="340" y="390" as="sourcePoint" />
+            <mxPoint x="500" y="390" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="220" y="420" />
+              <mxPoint x="220" y="230" />
+              <mxPoint x="335" y="230" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        
+        <mxCell id="components-to-state" value="" style="endArrow=open;endSize=12;dashed=1;html=1;rounded=0;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="ui-components" target="state-management">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="340" y="390" as="sourcePoint" />
+            <mxPoint x="500" y="390" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        
+        <mxCell id="state-to-api" value="" style="endArrow=open;endSize=12;dashed=1;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="state-management" target="api-service">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="340" y="390" as="sourcePoint" />
+            <mxPoint x="500" y="390" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- Backend Internal Dependencies -->
+        <mxCell id="controllers-to-middleware" value="" style="endArrow=open;endSize=12;dashed=1;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="auth-controllers" target="middleware">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="340" y="390" as="sourcePoint" />
+            <mxPoint x="500" y="390" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        
+        <mxCell id="controllers-to-models" value="" style="endArrow=open;endSize=12;dashed=1;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="habit-controllers" target="database-models">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="340" y="390" as="sourcePoint" />
+            <mxPoint x="500" y="390" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        
+        <mxCell id="controllers-to-utility" value="" style="endArrow=open;endSize=12;dashed=1;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="tracking-controllers" target="utility-services">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="340" y="390" as="sourcePoint" />
+            <mxPoint x="500" y="390" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- Frontend to Backend Dependencies -->
+        <mxCell id="api-to-auth-controllers" value="" style="endArrow=open;endSize=12;dashed=1;html=1;rounded=0;exitX=1;exitY=0.25;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;" edge="1" parent="1" source="api-service" target="auth-controllers">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="340" y="390" as="sourcePoint" />
+            <mxPoint x="500" y="390" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="410" y="325" />
+              <mxPoint x="410" y="165" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        
+        <mxCell id="api-to-habit-controllers" value="" style="endArrow=open;endSize=12;dashed=1;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="api-service" target="habit-controllers">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="340" y="390" as="sourcePoint" />
+            <mxPoint x="500" y="390" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="410" y="340" />
+              <mxPoint x="410" y="260" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        
+        <mxCell id="api-to-tracking-controllers" value="" style="endArrow=open;endSize=12;dashed=1;html=1;rounded=0;exitX=1;exitY=0.75;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="api-service" target="tracking-controllers">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="340" y="390" as="sourcePoint" />
+            <mxPoint x="500" y="390" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        
+        <mxCell id="api-to-reporting-controllers" value="" style="endArrow=open;endSize=12;dashed=1;html=1;rounded=0;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="api-service" target="reporting-controllers">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="340" y="390" as="sourcePoint" />
+            <mxPoint x="500" y="390" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="335" y="420" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- Backend to Database Dependencies -->
+        <mxCell id="models-to-users" value="" style="endArrow=open;endSize=12;dashed=1;html=1;rounded=0;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="database-models" target="users-collection">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="340" y="390" as="sourcePoint" />
+            <mxPoint x="500" y="390" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="675" y="500" />
+              <mxPoint x="345" y="500" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        
+        <mxCell id="models-to-habits" value="" style="endArrow=open;endSize=12;dashed=1;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="database-models" target="habits-collection">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="340" y="390" as="sourcePoint" />
+            <mxPoint x="500" y="390" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="710" y="500" />
+              <mxPoint x="505" y="500" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        
+        <mxCell id="models-to-completions" value="" style="endArrow=open;endSize=12;dashed=1;html=1;rounded=0;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=0.75;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="database-models" target="completions-collection">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="340" y="390" as="sourcePoint" />
+            <mxPoint x="500" y="390" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="745" y="520" />
+              <mxPoint x="380" y="520" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        
+        <mxCell id="models-to-badges" value="" style="endArrow=open;endSize=12;dashed=1;html=1;rounded=0;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=0.75;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="database-models" target="badges-collection">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="340" y="390" as="sourcePoint" />
+            <mxPoint x="500" y="390" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="745" y="520" />
+              <mxPoint x="540" y="520" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>]]>

@@ -1,0 +1,49 @@
+@startuml Activity Diagram
+
+title Activity Diagram - Habit Tracker Application
+
+start
+
+:User opens application;
+
+if (Is user logged in?) then (yes)
+  :Display Dashboard;
+else (no)
+  :Display Login Screen;
+  :User enters credentials;
+  if (Credentials valid?) then (yes)
+    :Display Dashboard;
+  else (no)
+    :Display error message;
+    stop
+  endif
+endif
+
+:User navigates application;
+
+fork
+  :Create New Habit;
+  :Fill Habit Details;
+  :Save Habit;
+fork again
+  :View Existing Habits;
+  :Mark habit as complete;
+  :Update Streak;
+  :Award Badge if achievement earned;
+fork again
+  :View Reports;
+  :Select Report Type;
+  fork
+    :Weekly Report;
+  fork again
+    :Monthly Report;
+  fork again
+    :Category Report;
+  end fork
+end fork
+
+:User logs out;
+
+stop
+
+@enduml
